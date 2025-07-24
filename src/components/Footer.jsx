@@ -127,7 +127,7 @@ const Footer = () => {
     setError(null);
 
     try {
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbwtNSoDWuU6t7bpUp3VMeC4Tb0DnxEKB7Cg6tk7ohWDoZaGLK0lwa3bYNsFwa7tkj00/exec';
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxCp-x-8CKOAGxO2A_0xw09tIXWoMLVBaaPxVhtDA-30Etw8mc2Mk1auK0yPdJML74/exec';
       
       // Create form data with the expected structure
       const formData = new URLSearchParams();

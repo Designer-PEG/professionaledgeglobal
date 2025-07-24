@@ -147,7 +147,7 @@ const Contact = () => {
     setSubmitSuccess(false)
 
     try {
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbxQ9GmhjzfMd_9CUw97WOoZp9oALbb_WupAPq-_Lh6z5RiDf6HcuvQGAt_ojgivlCjV/exec'
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxPingtSPIPmWQnzicm3MTKNEKJkAcxbY3z-ytPYm15319ZP1pAu_kh_5YvqG35CxoP/exec'
       
       const formDataEncoded = new URLSearchParams()
       for (const key in formData) {
