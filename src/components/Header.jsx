@@ -83,6 +83,9 @@ const Header = () => {
             <Link to="/services" className="text-white hover:text-blue-600 transition duration-300">
               Services
             </Link>
+            <Link to="/marketing" className="text-white hover:text-blue-600 transition duration-300">
+              Digital Marketing
+            </Link>
             <Link to="/contact" className="text-white hover:text-blue-600 transition duration-300">
               Contact
             </Link>
@@ -127,6 +130,13 @@ const Header = () => {
               onClick={closeMobileMenu}
             >
               Services
+            </Link>
+             <Link 
+              to="/marketing" 
+              className="block py-2 text-white hover:text-blue-600 transition duration-300"
+              onClick={closeMobileMenu}
+            >
+              Digital Marketing
             </Link>
             <Link 
               to="/contact" 

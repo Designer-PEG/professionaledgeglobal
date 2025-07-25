@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Shashank Shrestha",
+    "role": "Audit & Compliance Officer",
+    "image": "../assets/img/shashank.jpg",
+    "description": "Ensures regulatory compliance and maintains financial integrity through thorough auditing processes."
+  },
+  {
+    "name": "Jeshan Neupane",
+    "role": "Audit & Compliance Officer",
+    "image": "../assets/img/Jeshan.png",
+    "description": "Specializes in risk assessment and compliance verification to maintain operational standards."
+  },
+  {
+    "name": "Prakash Chaulagai",
+    "role": "Audit & Compliance Officer",
+    "image": "../assets/img/Prakash.jpg",
+    "description": "Implements audit frameworks and monitors adherence to organizational policies."
+  },
+  {
+    "name": "Bibek Shahi",
+    "role": "Audit Officer",
+    "image": "../assets/img/Bibek.jpg",
+    "description": "Conducts detailed financial examinations and ensures accurate reporting procedures."
+  },
+  {
+    "name": "Pujan Joshi",
+    "role": "Web & Graphic Designer",
+    "image": "../assets/img/Pujan.png",
+    "description": "Creates visually compelling designs and user-friendly web interfaces for digital solutions."
+  }
+]

@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
+import Marketing from "./pages/Marketing";
 import Contact from "./pages/Contact";
 import CareersPage from "./pages/Careers";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/services/:id?" element={<Services />} />
           <Route path="/career" element={<CareersPage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/marketing" element={<Marketing />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
