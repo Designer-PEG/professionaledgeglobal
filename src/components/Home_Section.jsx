@@ -1,6 +1,5 @@
-// src/components/Home_Section.js
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Changed from <a> to <Link>
+import { Link } from "react-router-dom";
 import quotes from "../json/qoute.json";
 import services from "../json/services.json";
 // Import all div images
@@ -35,20 +34,36 @@ const iconComponents = {
   FiActivity
 };
 
-// Array of all div images
 const divImages = [div1, div2, div3, div4, div5, div6, div7, div8];
 
 const Home_Section = () => {
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const [currentQuotes, setCurrentQuotes] = useState(quotes.filter(q => !q.specialDate));
+
+  useEffect(() => {
+    // Check if today is a special day
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    
+    const specialQuote = quotes.find(q => q.specialDate === todayString);
+    
+    if (specialQuote) {
+      // Show only the special quote on its day
+      setCurrentQuotes([specialQuote]);
+    } else {
+      // Show regular quotes (filter out special quotes)
+      setCurrentQuotes(quotes.filter(q => !q.specialDate));
+    }
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setQuoteIndex((prev) => (prev + 1) % quotes.length);
+      setQuoteIndex((prev) => (prev + 1) % currentQuotes.length);
     }, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentQuotes]);
 
-  const { quote, author } = quotes[quoteIndex];
+  const { quote, author } = currentQuotes[quoteIndex];
 
   const getIconComponent = (iconName) => {
     const Icon = iconComponents[iconName];
