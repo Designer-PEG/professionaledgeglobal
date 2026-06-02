@@ -58,26 +58,26 @@ const portfolioImages = [
 ];
 
 const iconMap = {
-  Search: <Search className="h-6 w-6 text-blue-600" />,
-  TrendingUp: <TrendingUp className="h-6 w-6 text-blue-600" />,
-  MessageCircle: <MessageCircle className="h-6 w-6 text-blue-600" />,
-  FileText: <FileText className="h-6 w-6 text-blue-600" />,
-  Mail: <Mail className="h-6 w-6 text-blue-600" />,
-  BarChart2: <BarChart2 className="h-6 w-6 text-blue-600" />,
-  Users: <Users className="h-6 w-6 text-blue-600" />,
-  Layout: <Layout className="h-6 w-6 text-blue-600" />,
-  Calendar: <Calendar className="h-6 w-6 text-blue-600" />,
-  Code: <Code className="h-6 w-6 text-blue-600" />,
-  Monitor: <Monitor className="h-6 w-6 text-blue-600" />,
-  Smartphone: <Smartphone className="h-6 w-6 text-blue-600" />,
-  Palette: <Palette className="h-6 w-6 text-blue-600" />,
-  Zap: <Zap className="h-6 w-6 text-blue-600" />,
-  Instagram: <Instagram className="h-6 w-6 text-blue-600" />,
-  Package: <Package className="h-6 w-6 text-blue-600" />,
-  Film: <Film className="h-6 w-6 text-blue-600" />,
-  Clapperboard: <Clapperboard className="h-6 w-6 text-blue-600" />,
-  Camera: <Camera className="h-6 w-6 text-blue-600" />,
-  BoxSelect: <BoxSelect className="h-6 w-6 text-blue-600" />
+  Search: <Search className="h-6 w-6 transition-colors duration-300" />,
+  TrendingUp: <TrendingUp className="h-6 w-6 transition-colors duration-300" />,
+  MessageCircle: <MessageCircle className="h-6 w-6 transition-colors duration-300" />,
+  FileText: <FileText className="h-6 w-6 transition-colors duration-300" />,
+  Mail: <Mail className="h-6 w-6 transition-colors duration-300" />,
+  BarChart2: <BarChart2 className="h-6 w-6 transition-colors duration-300" />,
+  Users: <Users className="h-6 w-6 transition-colors duration-300" />,
+  Layout: <Layout className="h-6 w-6 transition-colors duration-300" />,
+  Calendar: <Calendar className="h-6 w-6 transition-colors duration-300" />,
+  Code: <Code className="h-6 w-6 transition-colors duration-300" />,
+  Monitor: <Monitor className="h-6 w-6 transition-colors duration-300" />,
+  Smartphone: <Smartphone className="h-6 w-6 transition-colors duration-300" />,
+  Palette: <Palette className="h-6 w-6 transition-colors duration-300" />,
+  Zap: <Zap className="h-6 w-6 transition-colors duration-300" />,
+  Instagram: <Instagram className="h-6 w-6 transition-colors duration-300" />,
+  Package: <Package className="h-6 w-6 transition-colors duration-300" />,
+  Film: <Film className="h-6 w-6 transition-colors duration-300" />,
+  Clapperboard: <Clapperboard className="h-6 w-6 transition-colors duration-300" />,
+  Camera: <Camera className="h-6 w-6 transition-colors duration-300" />,
+  BoxSelect: <BoxSelect className="h-6 w-6 transition-colors duration-300" />
 };
 
 const serviceImages = {
@@ -103,46 +103,51 @@ const truncateDescription = (text, wordCount) => {
 
 export default function Marketing() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-24 space-y-24 mt-12">
 
       {/* Services */}
-      <section className="bg-gray-50 rounded-xl p-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+      <section className="bg-slate-50 border border-slate-100/80 rounded-3xl p-8 sm:p-12">
+        <div className="text-center mb-16">
+          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 inline-block">
+            Our Offerings
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 font-poppins">
             Our Creative Services
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Comprehensive solutions to elevate your brand's visual presence
+          <p className="text-slate-500 text-md max-w-xl mx-auto mt-3">
+            Comprehensive solutions to elevate your brand's visual presence and drive structural engagement.
           </p>
         </div>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map((service, index) => (
-        <div
-            key={index}
-            className="group relative bg-white rounded-lg border border-gray-200 hover:border-blue-600 transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md overflow-hidden"
-        >
-            <div 
-            className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-50 transition-opacity duration-300"
-            style={{ backgroundImage: `url(${serviceImages[service.title]})` }}
-            />
-            <div className="relative p-6 z-10">
-            <div className="flex items-center mb-4">
-                <div className="bg-blue-50 p-3 rounded-full mr-4">
-                {iconMap[service.iconName]}
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col"
+            >
+              {/* Contained image backdrop with scale on hover */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-5 group-hover:opacity-15 transition-all duration-700 ease-out group-hover:scale-105 pointer-events-none"
+                style={{ backgroundImage: `url(${serviceImages[service.title]})` }}
+              />
+              <div className="relative p-6 z-10 flex-grow flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-blue-50 p-3 rounded-2xl shadow-sm text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white flex-shrink-0">
+                    {iconMap[service.iconName]}
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300 font-poppins">
+                    {service.title}
+                  </h3>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800">
-                {service.title}
-                </h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-                {truncateDescription(service.description, 15)}
-            </p>
-                <div className="pt-4 border-t border-gray-100">
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                  {truncateDescription(service.description, 15)}
+                </p>
+                <div className="pt-5 border-t border-slate-100 mt-auto">
                   <ul className="space-y-2">
                     {service.metrics.map((metric, i) => (
                       <li key={i} className="flex items-start">
                         <svg
-                          className="h-5 w-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+                          className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -150,11 +155,11 @@ export default function Marketing() {
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth={2}
+                            strokeWidth={2.5}
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                        <span className="text-gray-700">{metric}</span>
+                        <span className="text-slate-600 text-xs font-semibold">{metric}</span>
                       </li>
                     ))}
                   </ul>
@@ -165,136 +170,163 @@ export default function Marketing() {
         </div>
       </section>
 
-     {/* Recent Works */}
-        <section>
-        <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+      {/* Recent Works */}
+      <section>
+        <div className="text-center mb-16">
+          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 inline-block">
+            Showcase
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 font-poppins">
             Recent Designs & Projects
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our latest creative work and ongoing projects
-            </p>
+          </h2>
+          <p className="text-slate-500 text-md max-w-xl mx-auto mt-3">
+            Explore our latest creative work and ongoing operational systems.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {recentWorks.map((work) => (
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {recentWorks.map((work) => (
             <div
-                key={work.id}
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group relative"
+              key={work.id}
+              className="bg-white border border-slate-100 shadow-sm hover:shadow-xl rounded-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full flex flex-col group relative"
             >
-                {/* Visit Button - Top Right */}
-                {work.url && (
+              {/* Visit Button - Top Right with Glassmorphism */}
+              {work.url && (
                 <a
-                    href={work.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-3 right-3 z-10 bg-white/90 hover:bg-white text-blue-600 hover:text-blue-800 font-medium text-xs px-3 py-1 rounded-full shadow-sm transition-all duration-200 flex items-center"
+                  href={work.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-4 right-4 z-20 bg-slate-900/80 hover:bg-slate-950 text-white backdrop-blur-md font-bold text-[10px] uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 flex items-center gap-1 border border-white/10"
                 >
-                    Visit
-                    <svg
+                  Visit
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-3 w-3 ml-1"
+                    className="h-3 w-3"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    >
+                  >
                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.5}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                     />
-                    </svg>
+                  </svg>
                 </a>
-                )}
-                
-                <div className="relative">
+              )}
+              
+              {/* Contained image block with zoom */}
+              <div className="h-48 overflow-hidden relative">
                 <img
-                    src={recentWorksImages[work.id]}
-                    alt={work.title}
-                    className="w-full h-48 object-cover"
+                  src={recentWorksImages[work.id]}
+                  alt={work.title}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <span
-                    className={`text-xs font-medium px-2 py-1 rounded-full ${
-                        work.status === "Completed"
-                        ? "bg-green-100 text-green-800"
+                {/* Visual backdrop for status tags */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent z-10 pointer-events-none" />
+                
+                <div className="absolute bottom-4 left-4 z-20">
+                  <span
+                    className={`text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-lg ${
+                      work.status === "Completed"
+                        ? "bg-emerald-100 text-emerald-800"
                         : work.status === "In Progress"
-                        ? "bg-yellow-100 text-yellow-800"
+                        ? "bg-amber-100 text-amber-800"
                         : "bg-blue-100 text-blue-800"
                     }`}
-                    >
+                  >
                     {work.status}
-                    </span>
+                  </span>
                 </div>
-                </div>
-                <div className="p-4">
-                <h3 className="font-bold text-lg text-gray-900 mb-1">
-                    {work.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-3">{work.description}</p>
-                <div className="flex flex-wrap gap-2">
-                    {work.tags.map((tag, index) => (
-                    <span
-                        key={index}
-                        className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded"
-                    >
-                        {tag}
-                    </span>
-                    ))}
-                </div>
-                </div>
-            </div>
-            ))}
-        </div>
-        </section>
+              </div>
 
-     {/* Portfolio */}
-    <section>
-    <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-        Success Stories
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-        See how we've helped businesses achieve remarkable results
-        </p>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {portfolioItems.map((item, index) => (
-        <div
-            key={index}
-            className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
-        >
-            <img
-            src={portfolioImages[index]}
-            alt={item.title}
-            className="w-full h-56 object-cover"
-            />
-            <div className="p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-                {item.title}
-            </h3>
-            <p className="text-gray-600 mb-4">{item.description}</p>
-            <div className="grid grid-cols-2 gap-4">
-                {item.results.map((result, i) => (
-                <div
-                    key={i}
-                    className="bg-blue-50 p-3 rounded-lg text-center"
-                >
-                    <p className="text-blue-600 font-bold text-xl">
-                    {result.value}
-                    </p>
-                    <p className="text-sm text-gray-600">{result.label}</p>
+              {/* Work Card details */}
+              <div className="p-5 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="font-bold text-lg text-slate-800 group-hover:text-blue-700 transition-colors duration-300 font-poppins mb-1.5">
+                    {work.title}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed mb-4">{work.description}</p>
                 </div>
-                ))}
+                
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-50 mt-4">
+                  {work.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="text-[10px] bg-slate-50 text-slate-500 px-2 py-1 rounded-md border border-slate-100/80 font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <button className="mt-6 flex items-center text-blue-600 font-medium hover:text-blue-800 transition">
-                View case study <ArrowRight className="ml-1 h-4 w-4" />
-            </button>
-            </div>
+          ))}
         </div>
-        ))}
-    </div>
-    </section>
+      </section>
+
+      {/* Portfolio */}
+      <section>
+        <div className="text-center mb-16">
+          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 inline-block">
+            Case Studies
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 font-poppins">
+            Success Stories
+          </h2>
+          <p className="text-slate-500 text-md max-w-xl mx-auto mt-3">
+            See how we've helped businesses achieve remarkable operational growth.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {portfolioItems.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white border border-slate-100 shadow-sm hover:shadow-xl rounded-3xl overflow-hidden flex flex-col group transition-all duration-500 hover:-translate-y-2"
+            >
+              <div className="h-56 overflow-hidden relative">
+                <img
+                  src={portfolioImages[index]}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-slate-950/10 pointer-events-none" />
+              </div>
+              
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300 font-poppins mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">{item.description}</p>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    {item.results.map((result, i) => (
+                      <div
+                        key={i}
+                        className="bg-blue-50/50 border border-blue-100/50 p-3.5 rounded-2xl text-center shadow-sm"
+                      >
+                        <p className="text-blue-700 font-bold text-lg sm:text-xl">
+                          {result.value}
+                        </p>
+                        <p className="text-[10px] uppercase font-bold tracking-wider text-slate-500 mt-0.5">{result.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-5 border-t border-slate-50">
+                  <button className="flex items-center gap-1 text-blue-600 font-bold text-sm tracking-wider uppercase hover:text-blue-800 transition">
+                    View Case Study <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Testimonials */}
       <section className="bg-gray-50 rounded-xl p-8">

@@ -205,7 +205,7 @@ const Contact = () => {
             <h3 className="text-2xl font-semibold">Contact Information</h3>
 
             <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-indigo-600">
+              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -218,7 +218,7 @@ const Contact = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-indigo-600">
+              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
@@ -231,7 +231,7 @@ const Contact = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-indigo-600">
+              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
@@ -279,7 +279,7 @@ const Contact = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                className={`w-full px-4 py-3 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
               />
               {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
             </div>
@@ -294,7 +294,7 @@ const Contact = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
               />
               {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
             </div>
@@ -309,7 +309,7 @@ const Contact = () => {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.company ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                className={`w-full px-4 py-3 border ${errors.company ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
               />
               {errors.company && <p className="mt-1 text-sm text-red-500">{errors.company}</p>}
             </div>
@@ -324,7 +324,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 rows={4}
-                className={`w-full px-4 py-3 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                className={`w-full px-4 py-3 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
               ></textarea>
               {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
             </div>
@@ -332,7 +332,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting || timerActive}
-              className={`w-full bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition duration-300 ${
+              className={`w-full bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300 ${
                 isSubmitting || timerActive ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >

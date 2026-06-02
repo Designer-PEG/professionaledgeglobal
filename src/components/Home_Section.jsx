@@ -65,79 +65,101 @@ const Home_Section = () => {
 
   const { quote, author } = currentQuotes[quoteIndex];
 
-  const getIconComponent = (iconName) => {
+  const getIconComponent = (iconName, className = "text-blue-900") => {
     const Icon = iconComponents[iconName];
-    return <Icon className="text-blue-900" size={20} />;
+    if (!Icon) return null;
+    return <Icon className={className} size={22} />;
   };
 
   return (
     <>
       {/* Quote Section */}
-      <section className="bg-gray-100 py-12 px-6 text-center transition-all duration-1000">
-        <div className="max-w-3xl mx-auto">
-          <blockquote className="text-xl italic text-gray-600">"{quote}"</blockquote>
-          <p className="mt-4 text-gray-500">- {author}</p>
+      <section className="bg-slate-50 py-16 px-6 text-center border-y border-slate-100/80">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-white via-slate-50/50 to-white py-12 px-8 rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden">
+          {/* Subtle Decorative SVG Quotes in Background */}
+          <div className="absolute top-4 left-6 text-slate-100 text-8xl font-serif select-none pointer-events-none">“</div>
+          <div className="absolute bottom-[-20px] right-6 text-slate-100 text-8xl font-serif select-none pointer-events-none">”</div>
+          
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <blockquote className="text-xl sm:text-2xl font-medium text-slate-700 leading-relaxed font-poppins italic">
+              "{quote}"
+            </blockquote>
+            <div className="mt-6 flex items-center justify-center gap-2">
+              <span className="w-5 h-[1px] bg-slate-300"></span>
+              <span className="text-xs font-bold tracking-wider text-slate-500 uppercase font-poppins">- {author}</span>
+              <span className="w-5 h-[1px] bg-slate-300"></span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="bg-white py-16 px-4" aria-labelledby="service-label">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-center text-blue-600 mb-2" id="service-label">What We Do?</p>
-          <h2 className="text-2xl md:text-3xl text-center mb-12 text-gray-800">
-            Our professional services meet your financial needs.
-          </h2>
+      <section className="bg-white py-20 px-6" aria-labelledby="service-label">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3 inline-block" id="service-label">
+              What We Do?
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 font-poppins">
+              Our professional services meet your financial needs.
+            </h2>
+            <p className="text-slate-500 text-md max-w-xl mx-auto mt-3">
+              Explore dynamic, results-driven solutions designed to navigate financial challenges and optimize operational growth.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.slice(0, 4).map((service, index) => (
-              <div key={service.id} className="relative">
-                {/* White icon box in top-right corner */}
-                <div className="absolute -top-2 -right-2 w-12 h-12 bg-white rounded-sm shadow-md flex items-center justify-center z-10">
-                  {getIconComponent(service.icon)}
+              <div 
+                key={service.id} 
+                className="group relative bg-white border border-slate-100 shadow-sm hover:shadow-xl rounded-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full flex flex-col focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2"
+              >
+                {/* Floating Category Icon Circle */}
+                <div className="absolute top-40 right-6 w-14 h-14 bg-gradient-to-br from-blue-700 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center z-20 border-2 border-white group-hover:from-blue-800 group-hover:to-blue-700 transition-all duration-300 transform group-hover:rotate-6">
+                  {getIconComponent(service.icon, "text-white")}
                 </div>
                 
-                {/* Main service card with cut-out */}
-                <div className="bg-white border border-gray-200 shadow-md rounded-md hover:shadow-lg transition-shadow duration-300 overflow-hidden h-full flex flex-col relative">
-                  {/* Image container with constrained height */}
-                  <div className="h-40 overflow-hidden">
-                    <img 
-                      src={divImages[index]} 
-                      alt={service.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                {/* Image Container with Hover zoom */}
+                <div className="h-48 overflow-hidden relative">
+                  <img 
+                    src={divImages[index]} 
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  {/* Soft Color Tint Overlay */}
+                  <div className="absolute inset-0 bg-slate-950/10 group-hover:bg-slate-950/20 transition-colors duration-500 pointer-events-none" />
+                </div>
+              
+                {/* Service Card Content */}
+                <div className="p-6 pt-8 flex-grow flex flex-col">
+                  <h3 className="text-xl font-bold mb-3 text-slate-800 group-hover:text-blue-700 transition-colors duration-300 font-poppins">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                    {service.description}
+                  </p>
                   
-                  {/* Triangular cut-out effect */}
-                  <div className="absolute top-[80px] right-[10px] w-100 h-22 bg-white transform rotate-45 origin-top-right translate-x-1/4 -translate-y-1/4 z-0" />
-                
-                  {/* Service content */}
-                  <div className="p-6 pt-4 flex-grow flex flex-col">
-                    <div className="relative z-10">
-                      <h3 className="text-xl font-bold mb-4 text-gray-800">{service.title}</h3>
-                      <p className="text-gray-600 mb-4">{service.description}</p>
-                    </div>
-                    <div className="mt-auto">
-                      <Link
-                        to={`/services/${service.id}`}
-                        className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+                  <div className="mt-auto">
+                    <Link
+                      to={`/services/${service.id}`}
+                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm tracking-wider uppercase transition-all duration-300 focus:outline-none focus:underline"
+                    >
+                      LEARN MORE
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        className="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform duration-300" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
                       >
-                        LEARN MORE
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className="h-4 w-4 ml-1" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M9 5l7 7-7 7" 
-                          />
-                        </svg>
-                      </Link>
-                    </div>
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2.5} 
+                          d="M9 5l7 7-7 7" 
+                        />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
               </div>

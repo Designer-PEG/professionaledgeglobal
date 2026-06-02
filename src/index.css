@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Custom Global Text Selection (Highlight) Color */
+::selection {
+  background-color: #9333ea; /* Premium purple-600 */
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #9333ea;
+  color: #ffffff;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
 }

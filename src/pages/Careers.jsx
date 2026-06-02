@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FiDollarSign, FiBookOpen, FiHome, FiGlobe } from 'react-icons/fi';
 
 const CareersPage = () => {
   const [email, setEmail] = useState('');
@@ -300,27 +301,27 @@ const CareersPage = () => {
                       {
                         name: 'Competitive Compensation',
                         description: 'We offer market-leading salaries and comprehensive benefits packages.',
-                        icon: '💵',
+                        icon: <FiDollarSign className="text-blue-600" size={20} />,
                       },
                       {
                         name: 'Professional Growth',
                         description: 'Continuous learning opportunities and career development programs.',
-                        icon: '📚',
+                        icon: <FiBookOpen className="text-blue-600" size={20} />,
                       },
                       {
                         name: 'Flexible Work',
                         description: 'Hybrid work models and flexible scheduling options.',
-                        icon: '🏡',
+                        icon: <FiHome className="text-blue-600" size={20} />,
                       },
                       {
                         name: 'Inclusive Culture',
                         description: 'Diverse team where everyone feels valued and respected.',
-                        icon: '🌍',
+                        icon: <FiGlobe className="text-blue-600" size={20} />,
                       },
                     ].map((benefit, index) => (
                       <div key={index} className="flex items-start">
                         <div className="flex-shrink-0 bg-blue-50 rounded-lg p-3">
-                          <span className="text-xl">{benefit.icon}</span>
+                          {benefit.icon}
                         </div>
                         <div className="ml-4">
                           <h3 className="text-lg font-medium text-gray-900">{benefit.name}</h3>
