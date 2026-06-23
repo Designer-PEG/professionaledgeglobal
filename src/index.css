@@ -1,20 +1,40 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #0b4a93;
+  --color-accent: #00a859;
+  --color-neutral-bg: #f8f8f6;
+  --color-text-dark: #0f0f0f;
+  --color-border: #e5e5e5;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
 /* Custom Global Text Selection (Highlight) Color */
 ::selection {
-  background-color: #9333ea; /* Premium purple-600 */
+  background-color: var(--color-primary);
   color: #ffffff;
 }
 
 ::-moz-selection {
-  background-color: #9333ea;
+  background-color: var(--color-primary);
   color: #ffffff;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-neutral-bg);
+  color: var(--color-text-dark);
+  line-height: 1.65;
+  letter-spacing: -0.01em;
 }
 
+/* Serif heading utility */
+.font-heading {
+  font-family: var(--font-serif);
+}
+
+/* Legacy alias */
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-sans);
 }

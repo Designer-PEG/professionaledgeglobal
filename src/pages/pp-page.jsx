@@ -1,4 +1,4 @@
-// src/pages/PrivacyPolicy.jsx
+// src/pages/pp-page.jsx
 import LegalLayout from '../components/LegalLayout';
 
 export default function PrivacyPolicy() {

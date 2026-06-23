@@ -7,9 +7,9 @@ import Services from "./pages/Services";
 import Marketing from "./pages/Marketing";
 import Contact from "./pages/Contact";
 import CareersPage from "./pages/Careers";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PrivacyPolicy from "./pages/pp-page";
 import Terms from "./pages/Terms.jsx";
-import CookiePolicy from "./pages/CookiePolicy.jsx";
+import CookiePolicy from "./pages/cc-page";
 import ScrollToTop from "./components/ScrollToTop";
 import "./index.css";
 

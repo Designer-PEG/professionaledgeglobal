@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 
 const Contact = () => {
@@ -20,19 +18,18 @@ const Contact = () => {
     'yopmail.com', 'mailinator.com', 'tempmail.com', 'guerrillamail.com',
     '10minutemail.com', 'trashmail.com', 'fakeinbox.com', 'temp-mail.org', 'test.com', 'admin.com',
     'example.com', 'demo.com', 'fakemail.com', 'maildrop.cc', 'getnada.com', 'throwawaymail.com',
-    'mytemp.email', 'mailnesia.com', 'spambox.us', 'spamgourmet.com', 'spambog.com', 'spambox.me', 'mailcatch.com', 'temp-mail.io', 'mail-temp.com',
-    'mail-temporaire.com', 'mail-temporaire.fr', 'mail-temporaire.net', 'mail-temporaire.org', 'mail-temporaire.info', 'mail-temporaire.cc', 'mail-temporaire.co.uk', 'mail-temporaire.us', 'mail-temporaire.biz', 'mail-temporaire.online',
-    'mail-temporaire.xyz', 'mail-temporaire.pro', 'mail-temporaire.store', 'mail-temporaire.shop', 'mail-temporaire.tech', 'mail-temporaire.app', 'mail-temporaire.dev', 'mail-temporaire.cloud', 'mail-temporaire.site', 'mail-temporaire.website',
-    'mail-temporaire.space', 'mail-temporaire.fun', 'mail-temporaire.live', 'mail-temporaire.world', 'mail-temporaire.today', 'mail-temporaire.cc', 'mail-temporaire.info', 'mail-temporaire.biz', 'mail-temporaire.pro', 'mail-temporaire.store',
-    'mail-temporaire.shop', 'mail-temporaire.tech', 'mail-temporaire.app', 'mail-temporaire.dev', 'mail-temporaire.cloud', 'mail-temporaire.site', 'mail-temporaire.website', 'mail-temporaire.space', 'mail-temporaire.fun',
-    'mail-temporaire.live', 'mail-temporaire.world', 'mail-temporaire.today', 'mail-temporaire.cc', 'mail-temporaire.info', 'mail-temporaire.biz', 'mail-temporaire.pro', 'mail-temporaire.store', 'mail-temporaire.shop', 'mail-temporaire.tech',
-    'mail-temporaire.app', 'mail-temporaire.dev', 'mail-temporaire.cloud', 'mail-temporaire.site', 'mail-temporaire.website', 'mail-temporaire.space', 'mail-temporaire.fun', 'mail-temporaire.live', 'mail-temporaire.world', 'mail-temporaire.today'
+    'mytemp.email', 'mailnesia.com', 'spambox.us', 'spamgourmet.com', 'spambog.com', 'spambox.me', 'mailcatch.com', 'temp-mail.io', 'mail-temp.com'
   ]
   
   const BLOCKED_KEYWORDS = ['test', 'admin', 'temp', 'example', 'demo', 'fake']
 
   // Check for existing timer on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
     const storedTimer = localStorage.getItem('contactFormTimer')
     if (storedTimer) {
       const remainingTime = calculateRemainingTime(storedTimer)
@@ -190,62 +187,67 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 bg-white text-gray-800 mt-6">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Let's Connect</h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+    <section id="contact" className="py-32 md:py-40 bg-[#f8f8f6] text-[#0f0f0f] mt-16 border-t border-slate-200 font-sans">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="mb-20 space-y-4">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#00a859] block">
+            Let's Connect
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#0f0f0f] font-heading">
+            Contact Us
+          </h2>
+          <p className="text-lg text-slate-500 max-w-2xl leading-relaxed">
             Have a question or want to work with us? We'd love to hear from you.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Left - Contact Info */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold">Contact Information</h3>
+          <div className="space-y-12">
+            <h3 className="text-xl font-bold uppercase tracking-wider text-[#0f0f0f] border-b border-slate-200 pb-4">
+              Contact Information
+            </h3>
 
-            <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
+            <div className="space-y-8">
+              <div className="flex items-start gap-5">
+                <div className="text-[#0b4a93] mt-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-1">Email</p>
+                  <p className="text-base text-[#0f0f0f] font-mono font-medium">professionaledgeglobal@gmail.com</p>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Email</p>
-                <p className="text-gray-500">professionaledgeglobal@gmail.com</p>
-              </div>
-            </div>
 
-            <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
+              <div className="flex items-start gap-5">
+                <div className="text-[#0b4a93] mt-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.387a12.035 12.035 0 01-7.108-7.108c-.155-.44.01-1.21.387-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-1">Phone</p>
+                  <p className="text-base text-[#0f0f0f] font-mono font-medium">+977 (98) 61171768</p>
+                  <p className="text-base text-[#0f0f0f] font-mono font-medium">+977 (98) 51135421</p>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Phone</p>
-                <p className="text-gray-500">+977 (98) 61171768</p>
-                <p className="text-gray-500">+977 (98) 51135421</p>
-              </div>
-            </div>
 
-            <div className="flex items-start gap-4">
-              <div className="bg-gray-100 p-3 rounded-lg text-blue-600">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p className="font-medium">Address</p>
-                <p className="text-gray-500">
-                  Tinkune, Kathmandu <br />
-                  Nepal
-                </p>
+              <div className="flex items-start gap-5">
+                <div className="text-[#0b4a93] mt-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-1">Address</p>
+                  <p className="text-base text-[#0f0f0f] font-medium leading-relaxed">
+                    Tinkune, Kathmandu <br />
+                    Nepal
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -253,10 +255,10 @@ const Contact = () => {
           {/* Right - Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {submitSuccess && (
-              <div className="p-4 bg-green-100 text-green-700 rounded-lg">
+              <div className="p-4 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg text-sm font-semibold">
                 Thank you for your message! We'll get back to you soon.
                 {timerActive && (
-                  <div className="mt-2 text-sm">
+                  <div className="mt-2 text-xs font-mono font-normal">
                     You can submit another message in: {formatTime(timeLeft)}
                   </div>
                 )}
@@ -264,13 +266,13 @@ const Contact = () => {
             )}
             
             {errors.form && (
-              <div className="p-4 bg-red-100 text-red-700 rounded-lg">
+              <div className="p-4 bg-red-50 text-red-800 border border-red-200 rounded-lg text-sm">
                 {errors.form}
               </div>
             )}
             
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
+            <div className="space-y-2">
+              <label htmlFor="name" className="block text-xs font-bold text-[#0f0f0f] mb-1 uppercase tracking-widest">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -279,13 +281,14 @@ const Contact = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-1 ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-slate-200 focus:ring-[#0b4a93] focus:border-[#0b4a93]'} bg-white text-sm text-[#0f0f0f] transition-all`}
+                required
               />
-              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+              {errors.name && <p className="mt-1 text-xs text-red-500 font-medium">{errors.name}</p>}
             </div>
             
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-xs font-bold text-[#0f0f0f] mb-1 uppercase tracking-widest">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -294,13 +297,14 @@ const Contact = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-slate-200 focus:ring-[#0b4a93] focus:border-[#0b4a93]'} bg-white text-sm text-[#0f0f0f] transition-all`}
+                required
               />
-              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+              {errors.email && <p className="mt-1 text-xs text-red-500 font-medium">{errors.email}</p>}
             </div>
             
-            <div>
-              <label htmlFor="company" className="block text-sm font-medium mb-2">
+            <div className="space-y-2">
+              <label htmlFor="company" className="block text-xs font-bold text-[#0f0f0f] mb-1 uppercase tracking-widest">
                 Company
               </label>
               <input
@@ -309,13 +313,13 @@ const Contact = () => {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border ${errors.company ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-1 ${errors.company ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-slate-200 focus:ring-[#0b4a93] focus:border-[#0b4a93]'} bg-white text-sm text-[#0f0f0f] transition-all`}
               />
-              {errors.company && <p className="mt-1 text-sm text-red-500">{errors.company}</p>}
+              {errors.company && <p className="mt-1 text-xs text-red-500 font-medium">{errors.company}</p>}
             </div>
             
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
+            <div className="space-y-2">
+              <label htmlFor="message" className="block text-xs font-bold text-[#0f0f0f] mb-1 uppercase tracking-widest">
                 Message <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -323,32 +327,21 @@ const Contact = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows={4}
-                className={`w-full px-4 py-3 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600`}
+                rows={5}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-1 ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-slate-200 focus:ring-[#0b4a93] focus:border-[#0b4a93]'} bg-white text-sm text-[#0f0f0f] transition-all`}
+                required
               ></textarea>
-              {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+              {errors.message && <p className="mt-1 text-xs text-red-500 font-medium">{errors.message}</p>}
             </div>
             
             <button
               type="submit"
               disabled={isSubmitting || timerActive}
-              className={`w-full bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300 ${
+              className={`w-full bg-[#0b4a93] text-white px-8 py-3.5 rounded-lg font-bold uppercase tracking-widest hover:bg-[#00a859] transition-colors duration-300 text-xs ${
                 isSubmitting || timerActive ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Sending...
-                </span>
-              ) : timerActive ? (
-                `Wait ${formatTime(timeLeft)}`
-              ) : (
-                'Send Message'
-              )}
+              {isSubmitting ? 'Sending...' : timerActive ? `Wait ${formatTime(timeLeft)}` : 'Send Message'}
             </button>
           </form>
         </div>

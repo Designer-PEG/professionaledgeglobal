@@ -9,43 +9,6 @@
   min-height: calc(100vh - 72px);
 }
 
-/* Marquee/Ticker Animation */
-.hero-marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  width: 100%;
-}
-
-.hero-marquee-wrapper {
-  display: flex;
-  white-space: nowrap;
-  animation: marquee 30s linear infinite;
-  width: max-content;
-}
-
-.hero-marquee-content {
-  display: flex;
-  white-space: nowrap;
-}
-
-.hero-marquee-wrapper:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.hero-marquee-item {
-  display: inline-block;
-  flex-shrink: 0;
-}
 
 /* Slide Transition Animations */
 @keyframes fadeIn {

@@ -1,4 +1,4 @@
-// src/pages/CookiePolicy.jsx
+// src/pages/cc-page.jsx
 import LegalLayout from '../components/LegalLayout';
 
 const CookiePolicy = () => {
