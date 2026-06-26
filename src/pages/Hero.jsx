@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiAward, FiStar, FiTrendingUp, FiActivity, FiShield } from 'react-icons/fi';
-import Rakhi from '../assets/Rakhi.png';
-import Gaijatra from '../assets/Gaijatra.png';
+import { FiArrowRight, FiAward, FiStar } from 'react-icons/fi';
+import Rakhi from '../assets/Rakhi.jpg';
+import Gaijatra from '../assets/Gaijatra.jpg';
 import heroBg from '../assets/bg-1.jpg';
-import heroBg3 from '../assets/bg-3.jpg';
 import heroBg4 from '../assets/bg-4.jpg';
-import about from '../assets/About.png';
-import Suresh from '../assets/Suresh.png';
-import Damodar from '../assets/Damodar.png';
+import Suresh from '../assets/Suresh.jpg';
+import Damodar from '../assets/Damodar.jpg';
 
 const regularSlides = [
   {
@@ -46,6 +44,11 @@ const Hero = () => {
   const [currentDuration, setCurrentDuration] = useState(REGULAR_DURATION);
   const [isSpecialDay, setIsSpecialDay] = useState(false);
   const [specialDayName, setSpecialDayName] = useState("");
+  const [visitedSlides, setVisitedSlides] = useState({ 0: true });
+
+  useEffect(() => {
+    setVisitedSlides((prev) => (prev[slideIndex] ? prev : { ...prev, [slideIndex]: true }));
+  }, [slideIndex]);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -166,16 +169,23 @@ const Hero = () => {
               {/* Main Image Container */}
               <div className="relative bg-white p-2 border-2 border-slate-900 rounded-[120px_120px_0px_120px] overflow-hidden aspect-[4/5] z-10 shadow-lg">
                 <div className="w-full h-full rounded-[110px_110px_0px_110px] overflow-hidden bg-slate-100 relative">
-                  {slides.map((slide, index) => (
-                    <img
-                      key={index}
-                      src={slide.image}
-                      alt={`Slide showcase ${index + 1}`}
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out transform ${
-                        index === slideIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-103 pointer-events-none'
-                      }`}
-                    />
-                  ))}
+                  {slides.map((slide, index) => {
+                    const isVisited = visitedSlides[index];
+                    return isVisited ? (
+                      <img
+                        key={index}
+                        src={slide.image}
+                        alt={`Slide showcase ${index + 1}`}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        {...(index === 0 ? { fetchPriority: "high" } : {})}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out transform ${
+                          index === slideIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-103 pointer-events-none'
+                        }`}
+                      />
+                    ) : (
+                      <div key={index} className="absolute inset-0 bg-slate-50" />
+                    );
+                  })}
                   <div className="absolute inset-0 bg-slate-950/5 pointer-events-none" />
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Suresh from '../assets/Suresh.png';
-import Damodar from '../assets/Damodar.png';
+import Suresh from '../assets/Suresh.jpg';
+import Damodar from '../assets/Damodar.jpg';
 import Shashank from '../assets/img/shashank.jpg';
 import Jeshan from '../assets/img/Jeshan.png';
 import Prakash from '../assets/img/Prakash.jpg';
