@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Search,
   TrendingUp,
@@ -9,7 +9,6 @@ import {
   Users,
   Layout,
   Calendar,
-  ArrowRight,
   Code,
   Monitor,
   Smartphone,
@@ -22,6 +21,7 @@ import {
   Camera,
   BoxSelect
 } from "lucide-react";
+import { FiArrowRight, FiAward } from "react-icons/fi";
 
 import services from "../json/services";
 import portfolioItems from "../json/portfolioItems";
@@ -59,26 +59,26 @@ const portfolioImages = [
 ];
 
 const iconMap = {
-  Search: <Search className="h-6 w-6 transition-colors duration-300" />,
-  TrendingUp: <TrendingUp className="h-6 w-6 transition-colors duration-300" />,
-  MessageCircle: <MessageCircle className="h-6 w-6 transition-colors duration-300" />,
-  FileText: <FileText className="h-6 w-6 transition-colors duration-300" />,
-  Mail: <Mail className="h-6 w-6 transition-colors duration-300" />,
-  BarChart2: <BarChart2 className="h-6 w-6 transition-colors duration-300" />,
-  Users: <Users className="h-6 w-6 transition-colors duration-300" />,
-  Layout: <Layout className="h-6 w-6 transition-colors duration-300" />,
-  Calendar: <Calendar className="h-6 w-6 transition-colors duration-300" />,
-  Code: <Code className="h-6 w-6 transition-colors duration-300" />,
-  Monitor: <Monitor className="h-6 w-6 transition-colors duration-300" />,
-  Smartphone: <Smartphone className="h-6 w-6 transition-colors duration-300" />,
-  Palette: <Palette className="h-6 w-6 transition-colors duration-300" />,
-  Zap: <Zap className="h-6 w-6 transition-colors duration-300" />,
-  Instagram: <Instagram className="h-6 w-6 transition-colors duration-300" />,
-  Package: <Package className="h-6 w-6 transition-colors duration-300" />,
-  Film: <Film className="h-6 w-6 transition-colors duration-300" />,
-  Clapperboard: <Clapperboard className="h-6 w-6 transition-colors duration-300" />,
-  Camera: <Camera className="h-6 w-6 transition-colors duration-300" />,
-  BoxSelect: <BoxSelect className="h-6 w-6 transition-colors duration-300" />
+  Search: <Search className="h-5 w-5" />,
+  TrendingUp: <TrendingUp className="h-5 w-5" />,
+  MessageCircle: <MessageCircle className="h-5 w-5" />,
+  FileText: <FileText className="h-5 w-5" />,
+  Mail: <Mail className="h-5 w-5" />,
+  BarChart2: <BarChart2 className="h-5 w-5" />,
+  Users: <Users className="h-5 w-5" />,
+  Layout: <Layout className="h-5 w-5" />,
+  Calendar: <Calendar className="h-5 w-5" />,
+  Code: <Code className="h-5 w-5" />,
+  Monitor: <Monitor className="h-5 w-5" />,
+  Smartphone: <Smartphone className="h-5 w-5" />,
+  Palette: <Palette className="h-5 w-5" />,
+  Zap: <Zap className="h-5 w-5" />,
+  Instagram: <Instagram className="h-5 w-5" />,
+  Package: <Package className="h-5 w-5" />,
+  Film: <Film className="h-5 w-5" />,
+  Clapperboard: <Clapperboard className="h-5 w-5" />,
+  Camera: <Camera className="h-5 w-5" />,
+  BoxSelect: <BoxSelect className="h-5 w-5" />
 };
 
 const serviceImages = {
@@ -102,242 +102,264 @@ const truncateDescription = (text, wordCount) => {
 };
 
 export default function Marketing() {
-  return (
-    <div className="max-w-5xl mx-auto px-6 py-24 space-y-28 mt-12 animate-fade-in font-sans">
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
-      {/* Services */}
-      <section className="bg-[#f8f8f6] border border-slate-200 rounded-2xl p-8 sm:p-12">
-        <div className="text-center mb-16 space-y-3">
-          <span className="px-3 py-1 bg-white border border-slate-200 text-[#0b4a93] text-xs font-semibold uppercase tracking-wider inline-block rounded-lg">
-            Our Offerings
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Our Creative Services
-          </h2>
-          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-            Comprehensive solutions to elevate your brand's visual presence and drive structural engagement.
-          </p>
-        </div>
+  return (
+    <div className="min-h-screen bg-white pt-36 pb-20 font-sans">
+      {/* Visual Back Accents */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-6 space-y-28 relative z-10">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="group relative bg-white border border-slate-200 rounded-lg transition-all duration-200 overflow-hidden flex flex-col hover:shadow-md"
-            >
-              <div className="p-5 flex-grow flex flex-col justify-between">
-                <div className="space-y-4">
-                  <div className="text-[#0b4a93] flex-shrink-0">
-                    {iconMap[service.iconName]}
+        {/* Creative Offerings */}
+        <section className="bg-slate-50 border border-slate-200/80 rounded-2xl p-8 sm:p-12 shadow-sm">
+          <div className="text-center mb-16 space-y-4">
+            <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
+              Creative Suite
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
+              Our Creative Services
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+              Comprehensive designs and digital solutions to elevate your brand presence and drive high structural engagement.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="group relative bg-white border border-slate-200/80 rounded-xl transition-all duration-300 overflow-hidden flex flex-col hover:border-brand-blue/30 hover:shadow-lg hover-lift"
+              >
+                <div className="p-5 flex-grow flex flex-col justify-between space-y-6">
+                  <div className="space-y-3">
+                    <div className="w-10 h-10 rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue/5 transition-colors duration-300">
+                      {iconMap[service.iconName] || <Palette className="h-5 w-5" />}
+                    </div>
+                    <h3 className="text-sm font-extrabold text-slate-900 font-heading tracking-tight leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">
+                      {truncateDescription(service.description, 14)}
+                    </p>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 font-heading">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    {truncateDescription(service.description, 15)}
-                  </p>
-                </div>
-                
-                <div className="pt-4 border-t border-slate-150 mt-6">
-                  <ul className="space-y-2">
-                    {service.metrics.map((metric, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#00a859] mt-1.5 mr-2 flex-shrink-0"></span>
-                        <span className="text-slate-600 text-xs font-medium">{metric}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  
+                  <div className="pt-4 border-t border-slate-100 mt-auto">
+                    <ul className="space-y-2">
+                      {service.metrics.map((metric, i) => (
+                        <li key={i} className="flex items-start gap-2 text-[11px] text-slate-500 font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1.5 flex-shrink-0"></span>
+                          <span>{metric}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      {/* Recent Works */}
-      <section>
-        <div className="text-center mb-16 space-y-3">
-          <span className="px-3 py-1 bg-slate-50 border border-slate-200 text-[#0b4a93] text-xs font-semibold uppercase tracking-wider inline-block rounded-lg">
-            Showcase
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Recent Designs & Projects
-          </h2>
-          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-            Explore our latest creative work and ongoing operational systems.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {recentWorks.map((work) => (
-            <div
-              key={work.id}
-              className="bg-white border border-slate-200 rounded-lg transition-all duration-200 hover:border-slate-350 hover:shadow-md overflow-hidden h-full flex flex-col group relative"
-            >
-              {/* Visit Button */}
-              {work.url && (
-                <a
-                  href={work.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-3 right-3 z-20 bg-slate-950/70 hover:bg-[#00a859] text-white text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-lg transition-colors duration-150 flex items-center gap-1"
-                >
-                  Visit
-                </a>
-              )}
-              
-              {/* Contained image block with zoom */}
-              <div className="h-44 overflow-hidden relative border-b border-slate-200">
-                <img
-                  src={recentWorksImages[work.id]}
-                  alt={work.title}
-                  className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 transition-all duration-300"
-                />
-                
-                <div className="absolute bottom-3 left-3 z-20">
-                  <span
-                    className={`text-[8px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-lg ${
-                      work.status === "Completed"
-                        ? "bg-emerald-50 text-emerald-800 border border-emerald-100"
-                        : work.status === "In Progress"
-                        ? "bg-amber-50 text-amber-800 border border-amber-100"
-                        : "bg-blue-50 text-blue-800 border border-blue-100"
-                    }`}
+        {/* Recent Designs grid */}
+        <section className="space-y-16">
+          <div className="text-center space-y-4">
+            <span className="px-3.5 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
+              Portfolio
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
+              Recent Designs & Projects
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+              Explore our latest creative work and active operational digital campaigns.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {recentWorks.map((work) => (
+              <div
+                key={work.id}
+                className="bg-white border border-slate-200/80 rounded-xl transition-all duration-300 hover:border-brand-blue/30 hover:shadow-lg overflow-hidden h-full flex flex-col group relative hover-lift"
+              >
+                {/* External link visit trigger */}
+                {work.url && (
+                  <a
+                    href={work.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 z-20 bg-slate-950/80 hover:bg-brand-green text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg transition-colors duration-250 flex items-center gap-1 shadow-md"
                   >
-                    {work.status}
+                    Visit
+                  </a>
+                )}
+                
+                {/* Visual frame with zoom */}
+                <div className="h-44 overflow-hidden relative bg-slate-950">
+                  <img
+                    src={recentWorksImages[work.id]}
+                    alt={work.title}
+                    className="w-full h-full object-cover grayscale opacity-85 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
+                  
+                  <div className="absolute bottom-4 left-4 z-20">
+                    <span
+                      className={`text-[8px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-full ${
+                        work.status === "Completed"
+                          ? "bg-emerald-50 text-emerald-800 border border-emerald-100/50"
+                          : work.status === "In Progress"
+                          ? "bg-amber-50 text-amber-800 border border-amber-100/50"
+                          : "bg-blue-50 text-blue-800 border border-blue-100/50"
+                      }`}
+                    >
+                      {work.status}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Details body */}
+                <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
+                  <div>
+                    <h3 className="font-extrabold text-sm text-slate-900 font-heading mb-1.5 leading-snug">
+                      {work.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs leading-relaxed">{work.description}</p>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
+                    {work.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="text-[9px] bg-slate-50 text-slate-500 px-2 py-0.5 border border-slate-200/60 font-semibold rounded-md uppercase tracking-wider"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Case Studies / Success Metrics */}
+        <section className="space-y-16">
+          <div className="text-center space-y-4">
+            <span className="px-3.5 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
+              Impact
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
+              Success Stories & Growth Metrics
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+              Real outcomes delivered to companies scaling operational reach and brand awareness.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {portfolioItems.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white border border-slate-200/80 rounded-xl overflow-hidden flex flex-col group transition-all duration-300 hover:border-brand-blue/30 hover:shadow-lg hover-lift"
+              >
+                <div className="h-48 overflow-hidden relative bg-slate-950">
+                  <img
+                    src={portfolioImages[index]}
+                    alt={item.title}
+                    className="w-full h-full object-cover grayscale opacity-85 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
+                </div>
+                
+                <div className="p-6 flex-grow flex flex-col justify-between space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-base font-extrabold text-slate-900 font-heading tracking-tight leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">{item.description}</p>
+                    
+                    {/* Performance metrics display */}
+                    <div className="grid grid-cols-2 gap-3 pt-3">
+                      {item.results.map((result, i) => (
+                        <div
+                          key={i}
+                          className="bg-slate-50 border border-slate-200/60 p-3 rounded-xl text-center"
+                        >
+                          <p className="text-brand-blue font-extrabold text-base">
+                            {result.value}
+                          </p>
+                          <p className="text-[8px] uppercase font-bold tracking-widest text-slate-400 mt-1">{result.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <span className="flex items-center gap-1.5 text-brand-blue group-hover:text-brand-green font-bold text-[10px] tracking-widest uppercase transition-colors">
+                      View Case Study
+                      <FiArrowRight size={10} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Client Endorsements Card slider */}
+        <section className="bg-slate-50 border border-slate-200/80 rounded-2xl p-8 sm:p-12 shadow-sm space-y-12">
+          <div className="text-center space-y-4">
+            <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
+              Endorsements
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
+              Client Testimonials
+            </h2>
+            <p className="text-slate-500 text-xs leading-relaxed max-w-xl mx-auto">
+              Our partners share their feedback on working with Professional Edge Global co-founders and experts.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-xl border border-slate-200/80 hover:border-brand-blue/30 transition-all duration-300 hover:shadow-md flex flex-col justify-between space-y-6"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="h-10 w-10 rounded-lg object-cover grayscale"
+                    />
+                    <div>
+                      <p className="font-extrabold text-slate-900 text-xs sm:text-sm">{testimonial.name}</p>
+                      <p className="text-[10px] text-slate-400 font-semibold">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 text-xs leading-relaxed italic">"{testimonial.content}"</p>
+                </div>
+                
+                <div className="flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-50 text-amber-800 text-[8px] font-extrabold tracking-wider uppercase border border-amber-100 rounded-full">
+                    ★ 5.0 Rating
+                  </span>
+                  <span className="text-[9px] font-semibold text-slate-400 font-mono">
+                    {testimonial.date}
                   </span>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
 
-              {/* Work Card details */}
-              <div className="p-4 flex-grow flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-sm text-slate-900 font-heading mb-1">
-                    {work.title}
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mb-4">{work.description}</p>
-                </div>
-                
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 mt-2">
-                  {work.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="text-[9px] bg-slate-50 text-slate-500 px-2 py-0.5 border border-slate-150 font-medium rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Portfolio */}
-      <section>
-        <div className="text-center mb-16 space-y-3">
-          <span className="px-3 py-1 bg-slate-50 border border-slate-200 text-[#0b4a93] text-xs font-semibold uppercase tracking-wider inline-block">
-            Case Studies
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Success Stories
-          </h2>
-          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-            See how we've helped businesses achieve remarkable operational growth.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {portfolioItems.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white border border-slate-200 rounded-lg overflow-hidden flex flex-col group transition-all duration-200 hover:border-slate-350 hover:shadow-md"
-            >
-              <div className="h-48 overflow-hidden relative border-b border-slate-200">
-                <img
-                  src={portfolioImages[index]}
-                  alt={item.title}
-                  className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-              
-              <div className="p-5 flex-grow flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 font-heading mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed mb-6">{item.description}</p>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    {item.results.map((result, i) => (
-                      <div
-                        key={i}
-                        className="bg-slate-50 border border-slate-150 p-3 rounded-lg text-center"
-                      >
-                        <p className="text-[#0b4a93] font-bold text-base sm:text-lg">
-                          {result.value}
-                        </p>
-                        <p className="text-[9px] uppercase font-bold tracking-wider text-slate-400 mt-0.5">{result.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="mt-6 pt-4 border-t border-slate-150">
-                  <button className="flex items-center gap-1 text-[#0b4a93] font-semibold text-xs tracking-wider uppercase hover:text-[#00a859] transition-colors duration-150">
-                    View Case Study
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-[#f8f8f6] rounded-2xl p-8 sm:p-12 border border-slate-200">
-        <div className="text-center mb-12 space-y-3">
-          <span className="px-3 py-1 bg-white border border-slate-200 text-[#0b4a93] text-xs font-semibold uppercase tracking-wider inline-block">
-            Endorsements
-          </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Client Testimonials
-          </h2>
-          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-            Don't just take our word for it - hear from our clients
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white p-5 rounded-lg border border-slate-200 hover:border-[#00a859] transition-all duration-200 hover:shadow-md"
-            >
-              <div className="flex items-center mb-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="h-10 w-10 rounded-lg object-cover mr-3 grayscale"
-                />
-                <div>
-                  <p className="font-semibold text-slate-900 text-sm">{testimonial.name}</p>
-                  <p className="text-xs text-slate-400">{testimonial.role}</p>
-                </div>
-              </div>
-              <p className="text-slate-600 text-xs leading-relaxed mb-4">"{testimonial.content}"</p>
-              <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-                <div className="flex items-center text-yellow-500">
-                  <span className="text-xs font-semibold text-slate-500">5.0 Rating</span>
-                </div>
-                <span className="text-[10px] text-slate-400">
-                  {testimonial.date}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

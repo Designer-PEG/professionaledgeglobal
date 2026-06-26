@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiDollarSign, FiBookOpen, FiHome, FiGlobe } from 'react-icons/fi';
+import { FiDollarSign, FiBookOpen, FiHome, FiGlobe, FiAlertCircle, FiBriefcase, FiCheckCircle } from 'react-icons/fi';
 
 const CareersPage = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +9,6 @@ const CareersPage = () => {
   const [cooldown, setCooldown] = useState(null);
   const [timeLeft, setTimeLeft] = useState(0);
 
-  // List of disposable email domains and test patterns
   const disposableDomains = [
     'yopmail.com', 'mailinator.com', 'temp-mail.org', 'guerrillamail.com',
     '10minutemail.com', 'tempmail.com', 'fakeinbox.com', 'trashmail.com',
@@ -21,7 +20,6 @@ const CareersPage = () => {
     'admin@admin.com', 'temp@temp.com', 'guest@guest.com', '123@123.com'
   ];
 
-  // Check for existing cooldown on component mount
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -45,7 +43,6 @@ const CareersPage = () => {
     }
   }, []);
 
-  // Update countdown timer
   useEffect(() => {
     let interval;
     if (cooldown) {
@@ -69,50 +66,36 @@ const CareersPage = () => {
   }, [cooldown]);
 
   const validateEmail = (emailVal) => {
-    // Basic email format validation
     if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       return 'Please enter a valid email address';
     }
-
-    // Check for test patterns
     if (testPatterns.includes(emailVal.toLowerCase())) {
       return 'Please use a valid email address';
     }
-
-    // Extract domain from email
     const domain = emailVal.split('@')[1].toLowerCase();
-
-    // Check for disposable domains
     if (disposableDomains.includes(domain)) {
       return 'Disposable email addresses are not allowed';
     }
-
-    // Check for suspicious patterns
     if (/^(test|temp|demo|example)/i.test(emailVal.split('@')[0])) {
       return 'Please use a valid email address';
     }
-
     return null;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validate email
     const emailError = validateEmail(email);
     if (emailError) {
       setError(emailError);
       return;
     }
 
-    // Check if this email was recently submitted
     const storedEmail = localStorage.getItem('lastSubmittedEmail');
     if (storedEmail === email) {
       setError('This email has already been submitted recently');
       return;
     }
 
-    // Check if in cooldown period
     if (cooldown) {
       setError('Please wait before submitting another email');
       return;
@@ -123,8 +106,6 @@ const CareersPage = () => {
 
     try {
       const scriptURL = 'https://script.google.com/macros/s/AKfycby4kMORYTPDmHJr3iaFK05KP4CBNvDGFHub5Xr2xSiOM4BWB0GRZlIFtryUYs3395AT/exec';
-      
-      // Create form data with the expected structure
       const formData = new URLSearchParams();
       formData.append('email', email);
       formData.append('timestamp', new Date().toISOString());
@@ -147,14 +128,11 @@ const CareersPage = () => {
         setIsSubscribed(true);
         setEmail('');
         
-        // Set cooldown period for 24 hours
-        const cooldownPeriod = 24*60*60*1000; // 24 hours in milliseconds
+        const cooldownPeriod = 24*60*60*1000;
         const cooldownEnd = new Date().getTime() + cooldownPeriod;
         
         setCooldown(cooldownEnd);
         setTimeLeft(cooldownPeriod);
-        
-        // Store in localStorage
         localStorage.setItem('emailCooldown', cooldownEnd.toString());
         localStorage.setItem('lastSubmittedEmail', email);
       } else {
@@ -169,51 +147,56 @@ const CareersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f8f6] mt-16 py-20 px-4 sm:px-6 lg:px-8 animate-fade-in font-sans">
-      <div className="max-w-5xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16 space-y-3">
-          <span className="px-3 py-1 bg-white border border-slate-200 text-[#0b4a93] text-xs font-semibold uppercase tracking-wider inline-block rounded-lg">
-            Join Our Team
+    <div className="min-h-screen bg-slate-50 pt-36 pb-20 font-sans relative overflow-hidden">
+      {/* Visual ambient layers */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none opacity-5" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        
+        {/* Header Block */}
+        <div className="text-center mb-20 space-y-4">
+          <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
+            Join Us
           </span>
-          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl lg:text-6xl font-heading">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
             Build Your Career With Us
           </h1>
-          <p className="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Join a team that values innovation, collaboration, and professional growth.
+          <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+            Join a dynamic consulting team that values operational innovation, continuous upskilling, and collaborative growth.
           </p>
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Job Openings Card */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center mb-6">
-                  <div className="text-[#0b4a93]">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+        {/* Main Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Job Alerts Details Box */}
+          <div className="lg:col-span-8">
+            <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-md">
+              <div className="p-6 sm:p-10 space-y-8">
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue">
+                    <FiBriefcase size={20} />
                   </div>
-                  <h2 className="ml-3 text-lg font-bold text-slate-900 font-heading">Current Opportunities</h2>
+                  <h2 className="text-lg font-extrabold text-slate-900 font-heading">Current Opportunities</h2>
                 </div>
 
                 <div className="space-y-6">
-                  <div className="p-5 bg-slate-50 border border-slate-200 rounded-lg">
-                    <h3 className="text-sm font-semibold text-slate-900">No current openings</h3>
-                    <p className="mt-2 text-slate-500 text-xs leading-relaxed">
-                      We don't have any open positions right now, but we're always looking for talented individuals.
+                  <div className="p-6 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <h3 className="text-sm font-extrabold text-slate-900 font-sans">No active vacancies at this time</h3>
+                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
+                      We do not have any open positions today, but we are always scouting for top-tier operations experts and graphic designers.
                     </p>
-                    <p className="mt-2 text-slate-500 text-xs leading-relaxed">
-                      Submit your email below to be the first to know about new opportunities.
+                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
+                      Sign up for our career updates below to be informed of new openings instantly.
                     </p>
                   </div>
 
                   {!isSubscribed ? (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div>
-                        <label htmlFor="email" className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                    <form onSubmit={handleSubmit} className="space-y-4 pt-4 border-t border-slate-100">
+                      <div className="space-y-2">
+                        <label htmlFor="email" className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">
                           Email Address
                         </label>
                         <input
@@ -224,135 +207,123 @@ const CareersPage = () => {
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-[#0b4a93] focus:border-[#0b4a93] text-slate-800 placeholder-slate-400 text-sm rounded-lg transition-colors duration-150"
-                          placeholder="your@email.com"
+                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 transition-colors"
+                          placeholder="name@company.com"
                         />
                       </div>
 
                       {error && (
-                        <div className="p-3 bg-red-50 rounded-lg border border-red-100 text-xs">
-                          <p className="font-semibold text-red-800">
-                            {error}
-                          </p>
+                        <div className="p-3 bg-red-50 text-red-800 border border-red-200/60 rounded-xl text-xs flex items-center gap-2">
+                          <FiAlertCircle className="flex-shrink-0" />
+                          <span className="font-semibold">{error}</span>
                         </div>
                       )}
 
                       {timeLeft > 0 && (
-                        <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-100 text-xs">
-                          <p className="font-semibold text-yellow-800">
-                            Please wait {timeLeft} seconds before submitting another email.
-                          </p>
+                        <div className="p-3 bg-amber-50 text-amber-800 border border-amber-200/60 rounded-xl text-xs">
+                          Cooldown period active. Please wait {timeLeft} seconds before next attempt.
                         </div>
                       )}
 
                       <button
                         type="submit"
                         disabled={isLoading || timeLeft > 0}
-                        className={`w-full flex justify-center items-center py-2.5 px-4 text-white font-semibold text-sm uppercase tracking-wider transition-colors duration-150 rounded-lg ${
-                          isLoading || timeLeft > 0 ? 'bg-slate-300 cursor-not-allowed' : 'bg-[#00a859] hover:bg-[#0b4a93]'
+                        className={`w-full py-3.5 px-6 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 rounded-xl shadow-xs active:scale-98 ${
+                          isLoading || timeLeft > 0 ? 'bg-slate-300 cursor-not-allowed' : 'bg-brand-green hover:bg-brand-blue'
                         }`}
                       >
-                        {isLoading ? 'Submitting...' : 'Notify Me About New Positions'}
+                        {isLoading ? 'Submitting...' : 'Subscribe to Vacancy Alerts'}
                       </button>
                     </form>
                   ) : (
-                    <div className="p-4 bg-green-50 rounded-lg border border-green-150 text-xs">
-                      <p className="font-semibold text-green-800">
-                        Thank you for subscribing! We'll notify you when new positions become available.
+                    <div className="p-5 bg-emerald-50 border border-emerald-150 text-center rounded-xl animate-fade-in shadow-inner">
+                      <FiCheckCircle className="text-brand-green mx-auto mb-2" size={24} />
+                      <p className="text-xs font-bold text-emerald-800 tracking-wide">
+                        ✓ Subscription Saved
+                      </p>
+                      <p className="text-[10px] text-slate-500 mt-1 leading-normal">
+                        Thank you for subscribing! We will notify you when matching career opportunities arise.
                       </p>
                     </div>
                   )}
                 </div>
+
               </div>
             </div>
           </div>
 
-          {/* Benefits Section */}
-          <div>
-            <div className="sticky top-24 space-y-6">
-              <div className="bg-white rounded-xl border border-slate-200 shadow-sm">
-                <div className="p-6">
-                  <div className="flex items-center mb-6">
-                    <div className="text-[#0b4a93]">
-                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                    <h2 className="ml-3 text-lg font-bold text-slate-900 font-heading">Why Join Us?</h2>
-                  </div>
-
-                  <div className="space-y-5">
-                    {[
-                      {
-                        name: 'Competitive Compensation',
-                        description: 'We offer market-leading salaries and comprehensive benefits packages.',
-                        icon: <FiDollarSign className="text-[#0b4a93]" size={16} />,
-                      },
-                      {
-                        name: 'Professional Growth',
-                        description: 'Continuous learning opportunities and career development programs.',
-                        icon: <FiBookOpen className="text-[#0b4a93]" size={16} />,
-                      },
-                      {
-                        name: 'Flexible Work',
-                        description: 'Hybrid work models and flexible scheduling options.',
-                        icon: <FiHome className="text-[#0b4a93]" size={16} />,
-                      },
-                      {
-                        name: 'Inclusive Culture',
-                        description: 'Diverse team where everyone feels valued and respected.',
-                        icon: <FiGlobe className="text-[#0b4a93]" size={16} />,
-                      },
-                    ].map((benefit, index) => (
-                      <div key={index} className="flex items-start">
-                        <div className="flex-shrink-0 bg-slate-50 border border-slate-150 p-2 rounded-lg">
-                          {benefit.icon}
-                        </div>
-                        <div className="ml-3.5">
-                          <h3 className="text-sm font-semibold text-slate-800">{benefit.name}</h3>
-                          <p className="mt-1 text-slate-500 text-xs leading-relaxed">{benefit.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          {/* Benefits sidebar columns */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Why Join Us card */}
+            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-md space-y-6">
+              <div className="flex items-center gap-2">
+                <FiCheckCircle className="text-brand-blue" />
+                <h2 className="text-sm font-extrabold text-slate-900 font-heading uppercase tracking-wide">Why Join Us?</h2>
               </div>
 
-              {/* Company Values */}
-              <div className="bg-white rounded-xl border border-slate-200 shadow-sm">
-                <div className="p-6">
-                  <div className="flex items-center mb-6">
-                    <div className="text-[#0b4a93]">
-                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+              <div className="space-y-5">
+                {[
+                  {
+                    name: 'Competitive Rewards',
+                    description: 'Market-competitive salaries, performance bonuses, and annual appraisals.',
+                    icon: <FiDollarSign className="text-brand-blue" />,
+                  },
+                  {
+                    name: 'Growth & Training',
+                    description: 'Paid certifications, continuous learning resources, and mentorship.',
+                    icon: <FiBookOpen className="text-brand-blue" />,
+                  },
+                  {
+                    name: 'Flexible Work',
+                    description: 'Support for hybrid workplace options and flexible hours.',
+                    icon: <FiHome className="text-brand-blue" />,
+                  },
+                  {
+                    name: 'Global Culture',
+                    description: 'Collaborate with teams across digital and physical consulting hubs.',
+                    icon: <FiGlobe className="text-brand-blue" />,
+                  },
+                ].map((benefit, index) => (
+                  <div key={index} className="flex gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center text-xs">
+                      {benefit.icon}
                     </div>
-                    <h2 className="ml-3 text-lg font-bold text-slate-900 font-heading">Our Values</h2>
+                    <div>
+                      <h3 className="text-xs font-bold text-slate-800 leading-tight">{benefit.name}</h3>
+                      <p className="mt-1 text-[11px] text-slate-500 leading-relaxed font-normal">{benefit.description}</p>
+                    </div>
                   </div>
-
-                  <ul className="space-y-3.5 text-xs">
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00a859] mt-1.5 mr-2.5 flex-shrink-0"></span>
-                      <span className="text-slate-600 font-medium">Innovation through collaboration</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00a859] mt-1.5 mr-2.5 flex-shrink-0"></span>
-                      <span className="text-slate-600 font-medium">Customer-first approach</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00a859] mt-1.5 mr-2.5 flex-shrink-0"></span>
-                      <span className="text-slate-600 font-medium">Data-driven decisions</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00a859] mt-1.5 mr-2.5 flex-shrink-0"></span>
-                      <span className="text-slate-600 font-medium">Ethical business practices</span>
-                    </li>
-                  </ul>
-                </div>
+                ))}
               </div>
             </div>
+
+            {/* Values card */}
+            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-md space-y-6">
+              <div className="flex items-center gap-2">
+                <FiCheckCircle className="text-brand-blue" />
+                <h2 className="text-sm font-extrabold text-slate-900 font-heading uppercase tracking-wide">Our Values</h2>
+              </div>
+
+              <ul className="space-y-3.5 text-xs text-slate-500 font-semibold">
+                {[
+                  'Innovation through collaboration',
+                  'Client-first advisory mapping',
+                  'Strict data-driven decisions',
+                  'Ethical corporate compliance'
+                ].map((val, index) => (
+                  <li key={index} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 flex-shrink-0"></span>
+                    <span className="leading-snug">{val}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
+
         </div>
+
       </div>
     </div>
   );

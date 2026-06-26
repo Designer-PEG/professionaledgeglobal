@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://professionaledgeglobal.com.np/sitemap.xml
