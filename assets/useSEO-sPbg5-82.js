@@ -1,0 +1,1 @@
+import{r}from"./index-Bpa8lNDY.js";const a=(e,t)=>{r.useEffect(()=>{if(e&&(document.title=`${e} ┃ Professional Edge Global`),t){const o=document.querySelector('meta[name="description"]');o&&o.setAttribute("content",t)}},[e,t])};export{a as u};
