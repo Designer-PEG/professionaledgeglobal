@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
-import { FiMail, FiPhone, FiMapPin, FiArrowRight, FiArrowLeft, FiCheck } from "react-icons/fi";
+import { Mail, Phone, MapPin, ArrowRight, ArrowLeft, Check, Clock } from "lucide-react";
+import useSEO from '../hooks/useSEO';
 
 const Contact = () => {
+  useSEO(
+    "Contact Us | Get Started",
+    "Get in touch with Professional Edge Global. Schedule a free corporate consultation or request pricing details for accounting, compliance, and marketing advisory."
+  );
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     serviceType: "accounting-consulting",
@@ -158,7 +163,6 @@ const Contact = () => {
       const scriptURL = 'https://script.google.com/macros/s/AKfycbxPingtSPIPmWQnzicm3MTKNEKJkAcxbY3z-ytPYm15319ZP1pAu_kh_5YvqG35CxoP/exec';
       
       const formDataEncoded = new URLSearchParams();
-      // Append fields. Format message to include selected service details
       formDataEncoded.append('name', formData.name);
       formDataEncoded.append('email', formData.email);
       formDataEncoded.append('company', formData.company || 'Individual');
@@ -200,264 +204,365 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-36 bg-slate-50 text-slate-800 font-sans relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none opacity-5" />
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        
-        <div className="mb-20 space-y-4">
-          <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-            Connect With Us
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Request an Advisory Consultation
-          </h2>
-          <p className="text-slate-500 text-xs sm:text-sm max-w-xl leading-relaxed font-normal">
-            Have a financial, tax compliance, or corporate training inquiry? Use our smart questionnaire to details your requirements.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left: Contact Info */}
-          <div className="lg:col-span-5 space-y-10">
-            <h3 className="text-lg font-extrabold text-slate-900 font-heading border-b border-slate-200 pb-4 tracking-wide uppercase">
-              Corporate Contacts
-            </h3>
-
-            <div className="space-y-6">
-              {/* Mail */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue shadow-3xs">
-                  <FiMail size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Email Address</p>
-                  <p className="text-sm font-semibold text-slate-800 mt-0.5">professionaledgeglobal@gmail.com</p>
-                </div>
-              </div>
-
-              {/* Phones */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue shadow-3xs">
-                  <FiPhone size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Phone Support</p>
-                  <p className="text-sm font-semibold text-slate-800 mt-0.5 leading-relaxed">
-                    +977 (98) 61171768 <br />
-                    +977 (98) 51135421
-                  </p>
-                </div>
-              </div>
-
-              {/* Address */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue shadow-3xs">
-                  <FiMapPin size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Headquarters Office</p>
-                  <p className="text-sm font-semibold text-slate-800 mt-0.5 leading-relaxed">
-                    Tinkune, Kathmandu <br />
-                    Nepal
-                  </p>
-                </div>
-              </div>
+    <div id="contact" className="min-h-screen bg-white font-sans">
+      
+      {/* Page Header */}
+      <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-[2px] bg-brand-blue" />
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue">
+                Connect With Us
+              </span>
             </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+              Request an Advisory Consultation
+            </h1>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Have a financial audit, tax compliance, ERP implementation, or digital strategy inquiry? Complete our brief intake form to connect with a managing partner.
+            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Right: Multi-Step Interactive Form */}
-          <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-lg">
+      {/* Main Content Split */}
+      <section className="py-20 lg:py-28 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Stepper Status Indicators */}
-            <div className="flex items-center justify-between pb-6 border-b border-slate-100 mb-8">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                    step === s 
-                      ? 'bg-brand-blue text-white shadow-sm ring-4 ring-brand-blue/15' 
-                      : step > s 
-                      ? 'bg-brand-green text-white' 
-                      : 'bg-slate-100 text-slate-400'
-                  }`}>
-                    {step > s ? <FiCheck size={14} /> : s}
+            {/* Left Column: Corporate Contacts Directory */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="space-y-2 pb-4 border-b border-slate-200">
+                <h2 className="text-xl font-bold text-slate-900 font-heading">
+                  Corporate Office &amp; Direct Lines
+                </h2>
+                <p className="text-sm text-slate-500">
+                  Reach our Kathmandu headquarters directly during standard business hours.
+                </p>
+              </div>
+
+              <div className="divide-y divide-slate-200">
+                {/* Email */}
+                <div className="py-5 first:pt-0 flex gap-4 items-start">
+                  <div className="text-brand-blue mt-0.5 flex-shrink-0">
+                    <Mail size={18} strokeWidth={1.75} />
                   </div>
-                  <span className={`text-[10px] uppercase tracking-wider font-extrabold hidden sm:block ${
-                    step === s ? 'text-brand-blue' : 'text-slate-400'
-                  }`}>
-                    {s === 1 ? 'Services' : s === 2 ? 'Details' : 'Confirm'}
-                  </span>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Email Address
+                    </p>
+                    <a 
+                      href="mailto:professionaledgeglobal@gmail.com"
+                      className="text-sm font-medium text-slate-900 hover:text-brand-blue transition-colors mt-1 block"
+                    >
+                      professionaledgeglobal@gmail.com
+                    </a>
+                  </div>
                 </div>
-              ))}
+
+                {/* Phones */}
+                <div className="py-5 flex gap-4 items-start">
+                  <div className="text-brand-blue mt-0.5 flex-shrink-0">
+                    <Phone size={18} strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Advisory Desk
+                    </p>
+                    <div className="text-sm font-medium text-slate-900 mt-1 space-y-1">
+                      <p>+977 (98) 61171768</p>
+                      <p>+977 (98) 51135421</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div className="py-5 flex gap-4 items-start">
+                  <div className="text-brand-blue mt-0.5 flex-shrink-0">
+                    <MapPin size={18} strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Headquarters
+                    </p>
+                    <p className="text-sm font-medium text-slate-900 mt-1 leading-relaxed">
+                      Tinkune, Kathmandu 44600<br />
+                      Bagmati Province, Nepal
+                    </p>
+                  </div>
+                </div>
+
+                {/* Hours */}
+                <div className="py-5 last:pb-0 flex gap-4 items-start">
+                  <div className="text-brand-blue mt-0.5 flex-shrink-0">
+                    <Clock size={18} strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Consultation Hours
+                    </p>
+                    <p className="text-sm text-slate-600 mt-1">
+                      Sunday – Friday: 9:30 AM – 6:00 PM (NPT)
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {submitSuccess && (
-              <div className="p-4 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs sm:text-sm font-bold mb-6 flex items-center gap-2">
-                <FiCheck className="text-brand-green flex-shrink-0" />
-                <span>Thank you! Your consultation request has been submitted successfully.</span>
-              </div>
-            )}
-
-            {errors.form && (
-              <div className="p-4 bg-red-50 text-red-800 border border-red-200 rounded-xl text-xs mb-6">
-                {errors.form}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Right Column: Multi-Step Consultation Form */}
+            <div className="lg:col-span-7 bg-white border border-slate-200 rounded-md p-6 sm:p-10 shadow-2xs">
               
-              {/* Step 1: Select Service Category */}
-              {step === 1 && (
-                <div className="space-y-4 animate-fade-in">
-                  <h4 className="text-sm font-extrabold text-slate-800 font-heading">Which service category does your request align with?</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {[
-                      { id: 'accounting-consulting', label: 'Accounting & Consultation' },
-                      { id: 'tax-advisory', label: 'Expert Tax Advisory' },
-                      { id: 'startup-diagnostic', label: 'Startup Health check-up' },
-                      { id: 'bpo-kpo-services', label: 'BPO / KPO Offshoring' },
-                      { id: 'corporate-legal-support', label: 'Corporate Legal Support' },
-                      { id: 'market-research', label: 'Creative & Digital SEO' },
-                      { id: 'erp-implementation', label: 'ERP Support & Odoo' },
-                      { id: 'hr-outsourcing', label: 'HR Outsourcing & coaching' }
-                    ].map((svc) => (
-                      <label 
-                        key={svc.id}
-                        className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer hover:bg-slate-50 transition-all ${
-                          formData.serviceType === svc.id 
-                            ? 'border-brand-blue bg-slate-50/50 ring-2 ring-brand-blue/10' 
-                            : 'border-slate-200/80 bg-white'
-                        }`}
-                      >
-                        <input 
-                          type="radio" 
-                          name="serviceType" 
-                          value={svc.id} 
-                          checked={formData.serviceType === svc.id}
-                          onChange={handleChange}
-                          className="text-brand-blue focus:ring-brand-blue w-4 h-4"
-                        />
-                        <span className="text-xs font-bold text-slate-700">{svc.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2: User and Company Details */}
-              {step === 2 && (
-                <div className="space-y-5 animate-fade-in">
-                  <h4 className="text-sm font-extrabold text-slate-800 font-heading">Tell us about yourself</h4>
-                  
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">Full Name *</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleChange} 
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-brand-blue'} text-xs sm:text-sm`} 
-                      placeholder="John Doe" 
-                      required 
-                    />
-                    {errors.name && <p className="text-[10px] text-red-500 font-semibold">{errors.name}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">Company Name (Optional)</label>
-                    <input 
-                      type="text" 
-                      name="company" 
-                      value={formData.company} 
-                      onChange={handleChange} 
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 ${errors.company ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-brand-blue'} text-xs sm:text-sm`} 
-                      placeholder="e.g. Acme Tech" 
-                    />
-                    {errors.company && <p className="text-[10px] text-red-500 font-semibold">{errors.company}</p>}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: Message Submissions */}
-              {step === 3 && (
-                <div className="space-y-5 animate-fade-in">
-                  <h4 className="text-sm font-extrabold text-slate-800 font-heading">Inquiry & Details</h4>
-
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">Email Address *</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-brand-blue'} text-xs sm:text-sm`} 
-                      placeholder="name@company.com" 
-                      required 
-                    />
-                    {errors.email && <p className="text-[10px] text-red-500 font-semibold">{errors.email}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">Message details *</label>
-                    <textarea 
-                      name="message" 
-                      rows={4} 
-                      value={formData.message} 
-                      onChange={handleChange} 
-                      className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-slate-200 focus:ring-brand-blue'} text-xs sm:text-sm`} 
-                      placeholder="Describe your goals..." 
-                      required 
-                    />
-                    {errors.message && <p className="text-[10px] text-red-500 font-semibold">{errors.message}</p>}
-                  </div>
-                </div>
-              )}
-
-              {/* Controls */}
-              <div className="pt-6 border-t border-slate-100 flex justify-between items-center">
-                {step > 1 ? (
-                  <button 
-                    type="button" 
-                    onClick={handleBack} 
-                    className="px-5 py-2.5 bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-1.5"
-                  >
-                    <FiArrowLeft />
-                    Back
-                  </button>
-                ) : <div />}
-
-                {step < 3 ? (
-                  <button 
-                    type="button" 
-                    onClick={handleNext} 
-                    className="px-5 py-2.5 bg-brand-blue hover:bg-brand-green text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all flex items-center gap-1.5"
-                  >
-                    Next
-                    <FiArrowRight />
-                  </button>
-                ) : (
-                  <button 
-                    type="submit" 
-                    disabled={isSubmitting || timerActive}
-                    className={`px-6 py-2.5 bg-brand-blue hover:bg-brand-green text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all ${
-                      isSubmitting || timerActive ? 'opacity-55 cursor-not-allowed' : 'active:scale-98'
-                    }`}
-                  >
-                    {isSubmitting ? 'Sending...' : timerActive ? `Wait ${formatTime(timeLeft)}` : 'Submit Consultation'}
-                  </button>
-                )}
+              {/* Stepper Header */}
+              <div className="grid grid-cols-3 gap-2 pb-6 border-b border-slate-200 mb-8">
+                {[
+                  { num: 1, label: 'Practice Area' },
+                  { num: 2, label: 'Organization' },
+                  { num: 3, label: 'Inquiry Scope' }
+                ].map((s) => {
+                  const isActive = step === s.num;
+                  const isDone = step > s.num;
+                  return (
+                    <div 
+                      key={s.num} 
+                      className={`pt-2.5 border-t-2 transition-colors ${
+                        isActive 
+                          ? 'border-brand-blue' 
+                          : isDone 
+                          ? 'border-brand-green' 
+                          : 'border-slate-200'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className={`text-xs font-mono font-semibold ${
+                          isActive ? 'text-brand-blue' : isDone ? 'text-brand-green' : 'text-slate-400'
+                        }`}>
+                          {isDone ? <Check size={13} /> : `0${s.num}`}
+                        </span>
+                        <span className={`text-xs font-semibold truncate ${
+                          isActive ? 'text-slate-900' : 'text-slate-500'
+                        }`}>
+                          {s.label}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-            </form>
+              {submitSuccess && (
+                <div className="p-4 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-md text-sm font-medium mb-6 flex items-center gap-2.5">
+                  <Check className="text-brand-green flex-shrink-0" size={18} />
+                  <span>Thank you. Your consultation request has been submitted and assigned to our advisory desk.</span>
+                </div>
+              )}
+
+              {errors.form && (
+                <div className="p-4 bg-red-50 text-red-800 border border-red-200 rounded-md text-xs font-medium mb-6">
+                  {errors.form}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                
+                {/* Step 1: Select Service Category */}
+                {step === 1 && (
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 font-heading">
+                        Which practice area does your inquiry align with?
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Select the primary discipline for your consultation.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      {[
+                        { id: 'accounting-consulting', label: 'Accounting & Consultation' },
+                        { id: 'tax-advisory', label: 'Expert Tax Advisory' },
+                        { id: 'startup-diagnostic', label: 'Startup Health Check-up' },
+                        { id: 'bpo-kpo-services', label: 'BPO / KPO Offshoring' },
+                        { id: 'corporate-legal-support', label: 'Corporate Legal Support' },
+                        { id: 'market-research', label: 'Creative & Digital SEO' },
+                        { id: 'erp-implementation', label: 'ERP Support & Odoo' },
+                        { id: 'hr-outsourcing', label: 'HR Outsourcing & Coaching' }
+                      ].map((svc) => {
+                        const isSelected = formData.serviceType === svc.id;
+                        return (
+                          <label 
+                            key={svc.id}
+                            className={`flex items-center gap-3 p-3.5 border rounded-md cursor-pointer transition-colors ${
+                              isSelected 
+                                ? 'border-brand-blue bg-slate-50 text-slate-900' 
+                                : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
+                            }`}
+                          >
+                            <input 
+                              type="radio" 
+                              name="serviceType" 
+                              value={svc.id} 
+                              checked={isSelected}
+                              onChange={handleChange}
+                              className="text-brand-blue focus:ring-brand-blue w-4 h-4"
+                            />
+                            <span className="text-sm font-medium">{svc.label}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: User and Company Details */}
+                {step === 2 && (
+                  <div className="space-y-5">
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 font-heading">
+                        Your Contact &amp; Organization Details
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Provide your name and organization so we can prepare for your call.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Full Name *
+                      </label>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleChange} 
+                        className={`w-full px-3.5 py-2.5 border rounded-md focus:outline-none focus:ring-2 text-sm text-slate-900 ${
+                          errors.name 
+                            ? 'border-red-500 focus:ring-red-500/15' 
+                            : 'border-slate-300 focus:border-brand-blue focus:ring-brand-blue/15'
+                        }`} 
+                        placeholder="e.g. Rajesh Shrestha" 
+                        required 
+                      />
+                      {errors.name && <p className="text-xs text-red-600 font-medium mt-1">{errors.name}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Company / Organization Name (Optional)
+                      </label>
+                      <input 
+                        type="text" 
+                        name="company" 
+                        value={formData.company} 
+                        onChange={handleChange} 
+                        className={`w-full px-3.5 py-2.5 border rounded-md focus:outline-none focus:ring-2 text-sm text-slate-900 ${
+                          errors.company 
+                            ? 'border-red-500 focus:ring-red-500/15' 
+                            : 'border-slate-300 focus:border-brand-blue focus:ring-brand-blue/15'
+                        }`} 
+                        placeholder="e.g. Himalayan Enterprises Pvt. Ltd." 
+                      />
+                      {errors.company && <p className="text-xs text-red-600 font-medium mt-1">{errors.company}</p>}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Message Submissions */}
+                {step === 3 && (
+                  <div className="space-y-5">
+                    <div>
+                      <h3 className="text-base font-bold text-slate-900 font-heading">
+                        Inquiry Scope &amp; Objectives
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Share your work email and a brief summary of your requirements.
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Work Email Address *
+                      </label>
+                      <input 
+                        type="email" 
+                        name="email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        className={`w-full px-3.5 py-2.5 border rounded-md focus:outline-none focus:ring-2 text-sm text-slate-900 ${
+                          errors.email 
+                            ? 'border-red-500 focus:ring-red-500/15' 
+                            : 'border-slate-300 focus:border-brand-blue focus:ring-brand-blue/15'
+                        }`} 
+                        placeholder="name@company.com" 
+                        required 
+                      />
+                      {errors.email && <p className="text-xs text-red-600 font-medium mt-1">{errors.email}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Project or Advisory Requirements *
+                      </label>
+                      <textarea 
+                        name="message" 
+                        rows={4} 
+                        value={formData.message} 
+                        onChange={handleChange} 
+                        className={`w-full px-3.5 py-2.5 border rounded-md focus:outline-none focus:ring-2 text-sm text-slate-900 ${
+                          errors.message 
+                            ? 'border-red-500 focus:ring-red-500/15' 
+                            : 'border-slate-300 focus:border-brand-blue focus:ring-brand-blue/15'
+                        }`} 
+                        placeholder="Outline your timeline, current operational challenges, or compliance questions..." 
+                        required 
+                      />
+                      {errors.message && <p className="text-xs text-red-600 font-medium mt-1">{errors.message}</p>}
+                    </div>
+                  </div>
+                )}
+
+                {/* Navigation Controls */}
+                <div className="pt-6 border-t border-slate-200 flex justify-between items-center">
+                  {step > 1 ? (
+                    <button 
+                      type="button" 
+                      onClick={handleBack} 
+                      className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-medium rounded-md transition-colors inline-flex items-center gap-1.5"
+                    >
+                      <ArrowLeft size={15} />
+                      <span>Back</span>
+                    </button>
+                  ) : <div />}
+
+                  {step < 3 ? (
+                    <button 
+                      type="button" 
+                      onClick={handleNext} 
+                      className="px-5 py-2.5 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium rounded-md transition-colors inline-flex items-center gap-1.5"
+                    >
+                      <span>Continue</span>
+                      <ArrowRight size={15} />
+                    </button>
+                  ) : (
+                    <button 
+                      type="submit" 
+                      disabled={isSubmitting || timerActive}
+                      className={`px-6 py-2.5 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium rounded-md transition-colors ${
+                        isSubmitting || timerActive ? 'opacity-55 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      {isSubmitting ? 'Submitting...' : timerActive ? `Wait ${formatTime(timeLeft)}` : 'Submit Consultation Request'}
+                    </button>
+                  )}
+                </div>
+
+              </form>
+            </div>
+
           </div>
-
         </div>
-
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

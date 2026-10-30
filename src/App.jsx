@@ -5,25 +5,46 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import "./index.css";
 
-// Lazy load route pages to improve initial load performance
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Services = lazy(() => import("./pages/Services"));
-const Marketing = lazy(() => import("./pages/Marketing"));
-const Contact = lazy(() => import("./pages/Contact"));
-const CareersPage = lazy(() => import("./pages/Careers"));
-const PrivacyPolicy = lazy(() => import("./pages/pp-page"));
-const Terms = lazy(() => import("./pages/Terms.jsx"));
-const CookiePolicy = lazy(() => import("./pages/cc-page"));
+// Lazy load route pages with retry logic to recover from chunk load errors due to redeployments
+const lazyWithRetry = (componentImport) =>
+  lazy(async () => {
+    try {
+      return await componentImport();
+    } catch (error) {
+      console.error("Chunk loading failed:", error);
+      const isChunkError = 
+        error.message && 
+        (error.message.includes("Failed to fetch dynamically imported module") || 
+         error.message.includes("error loading dynamically imported module"));
+         
+      if (isChunkError) {
+        // Force refresh the page from the server to get the latest build chunks
+        window.location.reload();
+        // Return a pending promise to prevent rendering broken components before reload
+        return new Promise(() => {});
+      }
+      throw error;
+    }
+  });
 
-// A clean, glassmorphic fallback component for router loading
+const Home = lazyWithRetry(() => import("./pages/Home"));
+const About = lazyWithRetry(() => import("./pages/About"));
+const Services = lazyWithRetry(() => import("./pages/Services"));
+const Marketing = lazyWithRetry(() => import("./pages/Marketing"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
+const CareersPage = lazyWithRetry(() => import("./pages/Careers"));
+const PrivacyPolicy = lazyWithRetry(() => import("./pages/pp-page"));
+const Terms = lazyWithRetry(() => import("./pages/Terms.jsx"));
+const CookiePolicy = lazyWithRetry(() => import("./pages/cc-page"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
+
+// Minimal fallback component for router loading
 const PageLoader = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-brand-blue font-sans relative z-50">
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:5rem_5rem] opacity-30 pointer-events-none" />
-    <div className="relative flex flex-col items-center space-y-4">
-      <div className="w-12 h-12 border-4 border-slate-200 border-t-brand-blue rounded-full animate-spin" />
-      <p className="text-[10px] font-extrabold tracking-widest text-slate-450 uppercase">
-        Loading Experience...
+  <div className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-900 font-sans">
+    <div className="flex flex-col items-center space-y-3">
+      <div className="w-7 h-7 border-2 border-slate-200 border-t-brand-blue rounded-full animate-spin" />
+      <p className="text-xs font-medium text-slate-500">
+        Loading...
       </p>
     </div>
   </div>
@@ -50,7 +71,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/">
-      <div className="App">
+      <div className="App min-h-screen flex flex-col bg-white text-slate-800">
         {/* Hidden HTML element (invisible but appears in Elements tab) */}
         <div 
           style={{ display: 'none' }}
@@ -60,19 +81,22 @@ function App() {
         
         <ScrollToTop />
         <Header />
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services/:id?" element={<Services />} />
-            <Route path="/career" element={<CareersPage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/marketing" element={<Marketing />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-and-conditions" element={<Terms />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
-          </Routes>
-        </Suspense>
+        <main className="flex-grow">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services/:id?" element={<Services />} />
+              <Route path="/career" element={<CareersPage />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/marketing" element={<Marketing />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-and-conditions" element={<Terms />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

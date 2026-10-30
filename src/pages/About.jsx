@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
-import Suresh from '../assets/Suresh.jpg';
-import Damodar from '../assets/Damodar.jpg';
-import Shashank from '../assets/img/shashank.jpg';
-import Jeshan from '../assets/img/Jeshan.png';
-import Prakash from '../assets/img/Prakash.jpg';
-import Bibek from '../assets/img/Bibek.jpg';
-import Pujan from '../assets/img/Pujan.png';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import Suresh from '../assets/Suresh.webp';
+import Damodar from '../assets/Damodar.webp';
+import Shashank from '../assets/img/shashank.webp';
+import Jeshan from '../assets/img/Jeshan.webp';
+import Prakash from '../assets/img/Prakash.webp';
+import Bibek from '../assets/img/Bibek.webp';
+import Pujan from '../assets/img/Pujan.webp';
 import About_Section from '../components/About_Section';
 import teamData from '../json/ourTeams.json';
+import useSEO from '../hooks/useSEO';
 
 const About = () => {
+  useSEO(
+    "Our Leadership & Team | About Us",
+    "Learn about Professional Edge Global's history, mission, co-founders Suresh Sharma and Damodar Paudel, and our team of business advisory experts."
+  );
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -20,79 +28,105 @@ const About = () => {
   const teamMembers = teamData.map(member => {
     let image;
     switch(member.image) {
-      case '../assets/Suresh.png': image = Suresh; break;
-      case '../assets/Damodar.png': image = Damodar; break;
-      case '../assets/img/shashank.jpg': image = Shashank; break;
-      case '../assets/img/Jeshan.png': image = Jeshan; break;
-      case '../assets/img/Prakash.jpg': image = Prakash; break;
-      case '../assets/img/Bibek.jpg': image = Bibek; break;
-      case '../assets/img/Pujan.png': image = Pujan; break;
+      case '../assets/Suresh.webp': image = Suresh; break;
+      case '../assets/Damodar.webp': image = Damodar; break;
+      case '../assets/img/shashank.webp': image = Shashank; break;
+      case '../assets/img/Jeshan.webp': image = Jeshan; break;
+      case '../assets/img/Prakash.webp': image = Prakash; break;
+      case '../assets/img/Bibek.webp': image = Bibek; break;
+      case '../assets/img/Pujan.webp': image = Pujan; break;
       default: image = Suresh;
     }
     return { ...member, image };
   });
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Editorial Header Section */}
-      <section id="about" className="pt-36 pb-20 bg-slate-50 border-b border-slate-200/50 font-sans relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,#cbd5e1/15,transparent_80%)] pointer-events-none" />
-        
-        <div className="container mx-auto px-6 max-w-5xl relative z-10">
-          <div className="text-center mb-20 space-y-4">
-            <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-              Who We Are
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
-              Professional Edge Global
-            </h1>
-            <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto leading-relaxed font-normal">
-              With over a decade of experience, we've helped hundreds of businesses transform operations, manage compliance, and achieve sustainable growth.
-            </p>
+    <div className="min-h-screen bg-white font-sans">
+      {/* Editorial Intro & Managing Partners */}
+      <section id="about" className="pt-28 pb-20 lg:pt-36 lg:pb-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          
+          {/* Top Split Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end pb-16 border-b border-slate-200">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-[2px] bg-brand-blue" />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue">
+                  Who We Are
+                </span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+                Professional Edge Global
+              </h1>
+              <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+                Founded in 2013, we have spent over a decade helping enterprises and growing businesses transform operations, maintain regulatory compliance, and achieve sustainable financial growth.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 lg:border-l lg:border-slate-200 lg:pl-8">
+              <blockquote className="text-base sm:text-lg font-medium text-slate-800 leading-relaxed font-heading italic">
+                &ldquo;Leadership is the capacity to translate vision into reality.&rdquo;
+              </blockquote>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                — Suresh Sharma &amp; Damodar Paudel, Co-Founders
+              </p>
+            </div>
           </div>
 
-          {/* Founders Grid */}
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl w-full">
-              {/* Suresh */}
-              <div className="group relative border border-slate-200/80 bg-slate-950 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-102">
-                <img
-                  src={Suresh}
-                  alt="Suresh Sharma, Founder"
-                  className="w-full h-80 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <h4 className="text-base font-extrabold tracking-tight font-heading">Suresh Sharma</h4>
-                  <p className="text-[10px] text-brand-green font-bold tracking-widest uppercase mt-1">Co-Founder & Director</p>
+          {/* Managing Partners Grid */}
+          <div className="pt-16">
+            <div className="mb-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block mb-2">
+                Executive Leadership
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-heading tracking-tight">
+                Managing Partners
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl">
+              {/* Suresh Sharma */}
+              <div className="space-y-4">
+                <div className="aspect-[4/4.3] overflow-hidden bg-slate-100 border border-slate-200 rounded-md">
+                  <img
+                    src={Suresh}
+                    alt="Suresh Sharma, Co-Founder & Director"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-lg font-bold text-slate-900 font-heading">Suresh Sharma</h3>
+                  <p className="text-xs font-semibold text-brand-blue uppercase tracking-wider mt-0.5">
+                    Co-Founder &amp; Director
+                  </p>
+                  <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Directs corporate strategy, statutory compliance architecture, and senior financial advisory across domestic and international client engagements.
+                  </p>
                 </div>
               </div>
               
-              {/* Damodar */}
-              <div className="group relative border border-slate-200/80 bg-slate-950 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-102">
-                <img
-                  src={Damodar}
-                  alt="Damodar Paudel, Founder"
-                  className="w-full h-80 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <h4 className="text-base font-extrabold tracking-tight font-heading">Damodar Paudel</h4>
-                  <p className="text-[10px] text-brand-green font-bold tracking-widest uppercase mt-1">Co-Founder & Consultant</p>
+              {/* Damodar Paudel */}
+              <div className="space-y-4">
+                <div className="aspect-[4/4.3] overflow-hidden bg-slate-100 border border-slate-200 rounded-md">
+                  <img
+                    src={Damodar}
+                    alt="Damodar Paudel, Co-Founder & Consultant"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-lg font-bold text-slate-900 font-heading">Damodar Paudel</h3>
+                  <p className="text-xs font-semibold text-brand-blue uppercase tracking-wider mt-0.5">
+                    Co-Founder &amp; Consultant
+                  </p>
+                  <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Leads operational restructuring, startup financial diagnostics, tax planning frameworks, and enterprise capacity building.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Founders Quote Card */}
-          <div className="max-w-2xl mx-auto mt-16 p-6 sm:p-8 bg-white border border-slate-200/80 rounded-2xl text-center shadow-xs">
-            <blockquote className="text-base sm:text-lg font-normal text-slate-600 leading-relaxed font-sans italic">
-              "Leadership is the capacity to translate vision into reality."
-            </blockquote>
-            <p className="mt-4 text-[10px] font-bold tracking-widest text-brand-blue uppercase font-sans">
-              — Suresh Sharma & Damodar Paudel
-            </p>
-          </div>
         </div>
       </section>
 
@@ -100,55 +134,97 @@ const About = () => {
       <About_Section /> 
 
       {/* Dedicated Experts Section */}
-      <section className="py-28 bg-white font-sans relative z-10">
-        <div className="container mx-auto px-6 max-w-5xl">
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
           
-          <div className="text-center mb-20 space-y-4">
-            <span className="px-3.5 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-              Our Experts
+          <div className="max-w-2xl mb-14 space-y-3">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block">
+              Our Specialists
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight font-heading">
               Meet Our Team
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-              Our dedicated team of professionals brings diverse expertise to deliver exceptional operations coaching and compliance support.
+            <p className="text-slate-600 text-base leading-relaxed">
+              Our audit officers, compliance specialists, and creative technologists work collaboratively to deliver rigorous execution.
             </p>
           </div>
 
-          {/* Team Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Unboxed Editorial Team Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {teamMembers.map((member, index) => (
-              <div 
-                key={index} 
-                className="group bg-white border border-slate-200/80 rounded-xl transition-all duration-300 overflow-hidden h-full flex flex-col hover:border-brand-blue/30 hover:shadow-lg hover-lift"
-              >
-                {/* Photo container */}
-                <div className="h-64 overflow-hidden relative bg-slate-950">
+              <div key={index} className="flex flex-col space-y-4">
+                <div className="h-72 overflow-hidden bg-slate-100 border border-slate-200 rounded-md">
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className="w-full h-full object-cover grayscale opacity-85 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
+                    className="w-full h-full object-cover object-top"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent pointer-events-none" />
                 </div>
                 
-                {/* Profile detail details */}
-                <div className="p-5 flex-grow flex flex-col justify-between space-y-4"> 
-                  <div>
-                    <h3 className="text-sm font-extrabold text-slate-900 font-heading tracking-tight leading-tight">
-                      {member.name}
-                    </h3>
-                    <p className="text-[9px] font-bold text-brand-green tracking-widest uppercase mt-1 mb-3">
-                      {member.role}
-                    </p>
-                    <p className="text-slate-500 text-xs leading-relaxed">
-                      {member.description}
-                    </p>
-                  </div>
+                <div className="space-y-1.5"> 
+                  <h3 className="text-lg font-bold text-slate-900 font-heading tracking-tight">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs font-semibold text-brand-blue uppercase tracking-wider">
+                    {member.role}
+                  </p>
+                  <p className="text-slate-600 text-sm leading-relaxed pt-1">
+                    {member.description}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Practice Divisions Cross-Navigation */}
+          <div className="mt-20 pt-14 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-7 bg-slate-50 border border-slate-200 rounded-md flex flex-col justify-between space-y-5">
+              <div className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand-blue block">
+                  Corporate &amp; Financial Division
+                </span>
+                <h3 className="text-xl font-bold text-slate-900 font-heading">
+                  Accounting, Tax, ERP &amp; BPO Advisory
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Explore our 8 core corporate consulting disciplines, including statutory audits, startup diagnostics, and offshore operations.
+                </p>
+              </div>
+              <div>
+                <Link
+                  to="/services"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-primary-hover group"
+                >
+                  <span>Explore Advisory Services</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="p-7 bg-slate-50 border border-slate-200 rounded-md flex flex-col justify-between space-y-5">
+              <div className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand-green block">
+                  Digital &amp; Creative Division
+                </span>
+                <h3 className="text-xl font-bold text-slate-900 font-heading">
+                  Digital Marketing, Web Design &amp; Brand Studio
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Discover our creative capabilities, live client website builds, SEO campaigns, packaging design, and media production.
+                </p>
+              </div>
+              <div>
+                <Link
+                  to="/marketing"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-primary-hover group"
+                >
+                  <span>Explore Digital &amp; Creative Suite</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

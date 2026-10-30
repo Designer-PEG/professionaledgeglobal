@@ -4,40 +4,40 @@ import quotes from "../json/qoute.json";
 import services from "../json/services.json";
 
 import { 
-  FiPieChart, 
-  FiBriefcase, 
-  FiSettings, 
-  FiDollarSign,
-  FiUsers,
-  FiFileText,
-  FiHeadphones,
-  FiActivity,
-  FiArrowRight,
-  FiChevronLeft,
-  FiChevronRight,
-  FiCheck,
-  FiPlus,
-  FiMinus,
-  FiShield,
-  FiTrendingUp,
-  FiGlobe
-} from "react-icons/fi";
+  PieChart, 
+  Briefcase, 
+  Settings, 
+  DollarSign,
+  Users,
+  FileText,
+  Headphones,
+  Activity,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+  Plus,
+  Minus,
+  ShieldCheck,
+  TrendingUp,
+  Globe
+} from "lucide-react";
 
 const iconComponents = {
-  FiPieChart,
-  FiBriefcase,
-  FiSettings,
-  FiDollarSign,
-  FiUsers,
-  FiFileText,
-  FiHeadphones,
-  FiActivity
+  FiPieChart: PieChart,
+  FiBriefcase: Briefcase,
+  FiSettings: Settings,
+  FiDollarSign: DollarSign,
+  FiUsers: Users,
+  FiFileText: FileText,
+  FiHeadphones: Headphones,
+  FiActivity: Activity
 };
 
 const Home_Section = () => {
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [currentQuotes, setCurrentQuotes] = useState(quotes.filter(q => !q.specialDate));
-  const [activeFaq, setActiveFaq] = useState(null);
+  const [activeFaq, setActiveFaq] = useState(0);
 
   useEffect(() => {
     const today = new Date();
@@ -65,7 +65,7 @@ const Home_Section = () => {
   const getIconComponent = (iconName, className = "text-brand-blue") => {
     const Icon = iconComponents[iconName];
     if (!Icon) return null;
-    return <Icon className={className} size={24} />;
+    return <Icon className={className} size={20} strokeWidth={1.75} />;
   };
 
   const handlePrevQuote = () => {
@@ -89,202 +89,241 @@ const Home_Section = () => {
 
   return (
     <>
-      {/* Premium Interactive Quote Carousel Block */}
-      <section className="bg-slate-50 py-24 px-6 text-center border-b border-slate-200/60 relative overflow-hidden font-sans">
-        <div className="absolute top-1/2 left-10 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 right-10 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="relative bg-white border border-slate-200/85 rounded-2xl p-8 sm:p-14 shadow-sm hover:shadow-md transition-shadow duration-300 max-w-3xl mx-auto group">
-            
-            <span className="absolute top-4 left-6 text-slate-100/70 text-7xl font-serif select-none pointer-events-none">“</span>
-            
-            <div className="relative z-10 px-4 sm:px-8 min-h-[110px] flex flex-col justify-center">
-              <blockquote className="text-base sm:text-xl font-bold text-slate-800 leading-relaxed font-heading italic">
-                "{activeQuote.quote}"
-              </blockquote>
-              <div className="mt-6 flex items-center justify-center gap-3">
-                <span className="w-5 h-[1px] bg-slate-350"></span>
-                <span className="text-[10px] font-extrabold tracking-widest text-brand-blue uppercase font-sans">
-                  {activeQuote.author}
-                </span>
-                <span className="w-5 h-[1px] bg-slate-350"></span>
-              </div>
-            </div>
-
-            {currentQuotes.length > 1 && (
-              <>
-                <button 
-                  onClick={handlePrevQuote}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-50 border border-slate-200 text-slate-500 hover:text-brand-blue hover:border-brand-blue/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 active:scale-95"
-                  aria-label="Previous quote"
-                >
-                  <FiChevronLeft size={18} />
-                </button>
-                <button 
-                  onClick={handleNextQuote}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-50 border border-slate-200 text-slate-500 hover:text-brand-blue hover:border-brand-blue/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 active:scale-95"
-                  aria-label="Next quote"
-                >
-                  <FiChevronRight size={18} />
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Redesigned Premium Services Showcase */}
-      <section className="bg-white py-28 px-6 animate-fade-in relative z-10 font-sans" aria-labelledby="service-label">
-        <div className="max-w-5xl mx-auto">
-          
-          <div className="text-center mb-20 space-y-4">
-            <span className="px-3.5 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs" id="service-label">
-              Our Offerings
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading leading-tight max-w-2xl mx-auto">
-              Strategic Solutions Built for Growth
-            </h2>
-            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-              Explore custom financial auditing, operations coaching, and corporate compliance strategies designed to elevate value.
+      {/* Editorial Perspective / Quote Strip */}
+      <section className="bg-white border-b border-slate-200 py-10 px-6 font-sans">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="border-l-2 border-brand-blue pl-5 max-w-3xl">
+            <blockquote className="text-base sm:text-lg font-medium text-slate-800 font-heading italic leading-relaxed">
+              &ldquo;{activeQuote.quote}&rdquo;
+            </blockquote>
+            <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              — {activeQuote.author}
             </p>
           </div>
 
-          {/* Cards Grid: Clean visual boxes with accent check features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.slice(0, 4).map((service) => (
+          {currentQuotes.length > 1 && (
+            <div className="flex items-center gap-2 self-end md:self-center flex-shrink-0">
+              <button 
+                onClick={handlePrevQuote}
+                className="w-8 h-8 rounded border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center justify-center transition-colors"
+                aria-label="Previous quote"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button 
+                onClick={handleNextQuote}
+                className="w-8 h-8 rounded border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 flex items-center justify-center transition-colors"
+                aria-label="Next quote"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Core Advisory Services — Architectural Grid */}
+      <section className="bg-white py-20 lg:py-28 px-6 font-sans" aria-labelledby="service-label">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block" id="service-label">
+                Core Practice Areas
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+                Strategic Solutions Built for Growth
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed">
+                Explore custom financial auditing, operations coaching, and corporate compliance strategies designed to protect and elevate enterprise value.
+              </p>
+            </div>
+
+            <Link 
+              to="/services" 
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-primary-hover group flex-shrink-0"
+            >
+              <span>View all {services.length} practice areas</span>
+              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+
+          {/* Flush Architectural Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-slate-200 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 bg-white">
+            {services.slice(0, 4).map((service, idx) => (
               <div 
                 key={service.id} 
-                className="group bg-white border border-slate-200/80 rounded-2xl p-6 transition-all duration-300 hover:border-brand-blue/30 hover:shadow-lg flex flex-col justify-between space-y-8 hover-lift"
+                className="p-7 flex flex-col justify-between hover:bg-slate-50/70 transition-colors duration-150"
               >
-                <div className="space-y-4">
-                  {/* Icon Frame */}
-                  <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue/5 group-hover:text-brand-blue transition-all duration-300 shadow-sm">
+                <div className="space-y-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-slate-400">
+                      0{idx + 1}
+                    </span>
                     {getIconComponent(service.icon)}
                   </div>
                   
-                  {/* Title & Body */}
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-extrabold text-slate-900 font-heading tracking-tight leading-snug">
+                  <div className="space-y-2.5">
+                    <h3 className="text-lg font-bold text-slate-900 font-heading tracking-tight leading-snug">
                       {service.title}
                     </h3>
-                    <p className="text-slate-500 text-[11px] sm:text-xs leading-relaxed">
+                    <p className="text-slate-600 text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>
+
+                  <ul className="pt-4 border-t border-slate-100 space-y-2">
+                    {(serviceFeatures[service.id] || ["Global Compliance", "Direct Consultations", "Data Transparency"]).map((item, index) => (
+                      <li key={index} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                        <Check className="text-brand-green flex-shrink-0" size={14} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Checklist Features */}
-                <div className="border-t border-slate-100 pt-4 space-y-2.5">
-                  {(serviceFeatures[service.id] || ["Global Compliance", "Direct Consultations", "Data Transparency"]).map((item, index) => (
-                    <div key={index} className="flex items-center gap-2 text-[10px] text-slate-600 font-medium">
-                      <FiCheck className="text-brand-green flex-shrink-0" size={12} />
-                      <span className="truncate">{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Read Strategy Call */}
-                <div className="pt-2">
+                <div className="pt-8 mt-6">
                   <Link
                     to={`/services/${service.id}`}
-                    className="inline-flex items-center gap-1.5 text-brand-blue group-hover:text-brand-green font-bold text-[10px] tracking-widest uppercase transition-colors duration-250 focus:outline-none"
+                    className="inline-flex items-center gap-1.5 text-brand-blue hover:text-primary-hover font-semibold text-xs uppercase tracking-wider group"
                   >
-                    View Strategy
-                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" size={12} />
+                    <span>Examine Practice</span>
+                    <ArrowRight className="group-hover:translate-x-0.5 transition-transform" size={14} />
                   </Link>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <Link 
-              to="/services" 
-              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 hover:border-brand-blue/30 text-slate-700 hover:text-brand-blue text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded-xl hover:shadow-xs"
-            >
-              Explore All Services
-            </Link>
+          {/* Digital Marketing & Creative Practice Callout Strip */}
+          <div className="mt-10 border border-slate-200 bg-slate-50 p-7 sm:p-9 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-green block">
+                Digital &amp; Creative Division
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-heading tracking-tight">
+                Digital Marketing, Web Engineering &amp; Brand Production
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Beyond financial and corporate advisory, our creative division delivers responsive web design, SEO, social media management, packaging design, and commercial video production.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+              <Link
+                to="/marketing"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium rounded-md transition-colors group"
+              >
+                <span>Explore Digital &amp; Creative Suite</span>
+                <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
           </div>
 
         </div>
       </section>
 
-      {/* Added Content 1: Strategic Value Strategy Segment */}
-      <section className="bg-slate-50 py-24 px-6 border-y border-slate-200/60 relative overflow-hidden font-sans">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none opacity-40" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          
-          <div className="text-center mb-16 space-y-4">
-            <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-              Why Partner With Us
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
-              Our Core Advisory Standards
-            </h2>
-            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-              We align startup operations to absolute regulatory benchmarks while minimizing financial liabilities.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <FiShield className="text-brand-blue" size={24} />,
-                title: "Direct Founder Consultation",
-                desc: "Work closely with our senior Co-founders Suresh Sharma & Damodar Paudel to receive customized strategic insights."
-              },
-              {
-                icon: <FiTrendingUp className="text-brand-green" size={24} />,
-                title: "Data-Driven Diagnostics",
-                desc: "We analyze financial indicators, runway buffers, and operational compliance with robust analytical frameworks."
-              },
-              {
-                icon: <FiGlobe className="text-brand-blue" size={24} />,
-                title: "International Reach",
-                desc: "Offering business process outsourcing (BPO) and KPO solutions to scale operations globally with high cost efficiencies."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-2xs hover:shadow-sm transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shadow-3xs mb-5">
-                  {item.icon}
-                </div>
-                <h3 className="text-sm font-extrabold text-slate-900 font-heading mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">{item.desc}</p>
+      {/* Advisory Standards — Asymmetric Editorial Split (No Cards) */}
+      <section className="bg-slate-50 py-20 lg:py-28 px-6 border-y border-slate-200 font-sans">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Narrative Header */}
+            <div className="lg:col-span-5 space-y-4">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block">
+                Why Partner With Us
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+                Our Core Advisory Standards
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed">
+                We align enterprise and startup operations to strict regulatory benchmarks while minimizing financial liabilities and administrative overhead.
+              </p>
+              <div className="pt-2">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-primary-hover group"
+                >
+                  <span>Meet our managing partners</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
               </div>
-            ))}
-          </div>
+            </div>
 
+            {/* Right Column: Ruled Editorial Rows */}
+            <div className="lg:col-span-7 border-t border-slate-200 divide-y divide-slate-200">
+              {[
+                {
+                  icon: ShieldCheck,
+                  title: "Direct Founder Consultation",
+                  desc: "Work directly with our senior Co-founders Suresh Sharma and Damodar Paudel to receive tailored strategic guidance, audit oversight, and board-level advisory."
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Data-Driven Financial Diagnostics",
+                  desc: "We evaluate key financial indicators, runway buffers, burn multiples, and tax exposure using rigorous analytical frameworks before prescribing operational changes."
+                },
+                {
+                  icon: Globe,
+                  title: "Scalable Cross-Border Delivery",
+                  desc: "Our Business Process Outsourcing (BPO) and Knowledge Process Outsourcing (KPO) models enable companies to scale back-office accounting and support operations with 40–60% cost efficiency."
+                }
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="py-7 first:pt-6 last:pb-0 flex gap-5 items-start">
+                    <div className="mt-1 text-brand-blue flex-shrink-0">
+                      <Icon size={22} strokeWidth={1.75} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <h3 className="text-lg font-bold text-slate-900 font-heading">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
         </div>
       </section>
 
-      {/* Added Content 2: Operational Onboarding Process Timeline */}
-      <section className="bg-white py-28 px-6 font-sans relative z-10 border-b border-slate-200/50">
-        <div className="max-w-5xl mx-auto">
+      {/* Operational Delivery Pipeline — Top-Ruled Architectural Columns */}
+      <section className="bg-white py-20 lg:py-28 px-6 border-b border-slate-200 font-sans">
+        <div className="max-w-6xl mx-auto">
           
-          <div className="text-center mb-20 space-y-4">
-            <span className="px-3.5 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-              Our Process
+          <div className="max-w-2xl mb-16 space-y-3">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block">
+              Engagement Methodology
             </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight font-heading">
               Operational Delivery Pipeline
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-              Our step-by-step methodology ensures seamless alignment with your corporate goals.
+            <p className="text-slate-600 text-base leading-relaxed">
+              A structured four-phase engagement model designed for measurable execution and regulatory clarity.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
             {[
-              { step: "01", name: "Initial Diagnostic", desc: "Evaluate runway, tax status, and backoffice gaps through our questionnaire tools." },
-              { step: "02", name: "Strategic Mapping", desc: "Draft a personalized regulatory and operational compliance roadmap with co-founders." },
-              { step: "03", name: "Upskilling & Setup", desc: "Deploy customized ERP/Odoo configurations and corporate coaching routines." },
-              { step: "04", name: "Continuous Monitoring", desc: "Perform periodic financial health check-ups and annual compliance filings." }
+              { step: "01", name: "Initial Diagnostic", desc: "Evaluate runway, tax posture, and back-office gaps through structured financial and operational assessments." },
+              { step: "02", name: "Strategic Mapping", desc: "Draft a tailored regulatory, tax, and operational compliance roadmap directly with our managing partners." },
+              { step: "03", name: "Systems & Upskilling", desc: "Deploy ERP/Odoo workflows, financial controls, and targeted staff capacity development programs." },
+              { step: "04", name: "Ongoing Governance", desc: "Conduct periodic financial health reviews, statutory audits, and annual regulatory filings." }
             ].map((proc, idx) => (
-              <div key={idx} className="relative space-y-4 text-left p-4 border border-slate-200/60 rounded-2xl bg-white shadow-3xs">
-                <span className="text-3xl font-extrabold text-slate-200 tracking-wider block font-heading">{proc.step}</span>
-                <h3 className="text-sm font-extrabold text-slate-900 leading-snug">{proc.name}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">{proc.desc}</p>
+              <div key={idx} className="border-t-2 border-slate-900 pt-5 space-y-3">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand-blue block">
+                  Phase {proc.step}
+                </span>
+                <h3 className="text-lg font-bold text-slate-900 font-heading leading-snug">
+                  {proc.name}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {proc.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -292,68 +331,74 @@ const Home_Section = () => {
         </div>
       </section>
 
-      {/* Added Content 3: FAQ Accordion for Client Conversions & SEO */}
-      <section className="bg-slate-50 py-24 px-6 border-b border-slate-200/60 font-sans relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          
-          <div className="text-center mb-16 space-y-4">
-            <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-              Support
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-slate-500 text-xs leading-relaxed">
-              Get answers to standard inquiries about our advisory services and integrations.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              {
-                q: "What areas of business does Professional Edge Global consult on?",
-                a: "We offer full-spectrum business services, including accounting and booking operations, expert tax advisory, corporate legal compliance, business process offshoring, Odoo/ERP installations, and digital marketing."
-              },
-              {
-                q: "How does the Startup Financial Health check-up work?",
-                a: "Our diagnostic evaluates your monthly revenues, operating burn rates, and cash reserves to calculate your runway buffer. Co-founders then guide you through budget restructuring or investment coaching."
-              },
-              {
-                q: "Can you support remote/offshore processes?",
-                a: "Yes, our BPO/KPO offshoring solutions provide secure data processing, backend accounting assistance, and customer support with up to 40-60% operational savings."
-              },
-              {
-                q: "Do you integrate Odoo or custom ERP modules?",
-                a: "Our engineering team provides comprehensive ERP systems setup—guiding selection, custom modules, database migration, and staff training to streamline workflows."
-              }
-            ].map((faq, idx) => (
-              <div 
-                key={idx} 
-                className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden transition-all duration-300"
-              >
-                <button
-                  onClick={() => toggleFaq(idx)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
-                  aria-expanded={activeFaq === idx}
+      {/* Frequently Asked Questions — Split Layout with Flush Dividers */}
+      <section className="bg-slate-50 py-20 lg:py-28 px-6 font-sans">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <div className="lg:col-span-5 space-y-4">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue block">
+                Client Support
+              </span>
+              <h2 className="text-3xl font-bold text-slate-900 tracking-tight font-heading">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed">
+                Common inquiries regarding our advisory engagements, diagnostic tools, and cross-border outsourcing models.
+              </p>
+              <div className="pt-2">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-primary-hover group"
                 >
-                  <span className="text-xs sm:text-sm font-bold text-slate-800 tracking-tight">{faq.q}</span>
-                  <span className="text-slate-400 ml-4">
-                    {activeFaq === idx ? <FiMinus size={16} /> : <FiPlus size={16} />}
-                  </span>
-                </button>
-                <div 
-                  className={`transition-all duration-300 overflow-hidden ${
-                    activeFaq === idx ? 'max-h-48 border-t border-slate-100' : 'max-h-0'
-                  }`}
-                >
-                  <p className="px-6 py-5 text-xs sm:text-sm text-slate-500 leading-relaxed font-normal bg-slate-50/30">
-                    {faq.a}
-                  </p>
-                </div>
+                  <span>Ask a specific question</span>
+                  <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
               </div>
-            ))}
-          </div>
+            </div>
 
+            <div className="lg:col-span-7 border-t border-slate-200 divide-y divide-slate-200">
+              {[
+                {
+                  q: "What areas of business does Professional Edge Global consult on?",
+                  a: "We offer full-spectrum business services, including accounting and bookkeeping operations, expert tax advisory, corporate legal compliance, business process offshoring, Odoo/ERP installations, and digital marketing."
+                },
+                {
+                  q: "How does the Startup Financial Health check-up work?",
+                  a: "Our diagnostic evaluates your monthly revenues, operating burn rates, and cash reserves to calculate your runway buffer. Co-founders then guide you through budget restructuring or investment coaching."
+                },
+                {
+                  q: "Can you support remote or offshore processes?",
+                  a: "Yes, our BPO/KPO offshoring solutions provide secure data processing, backend accounting assistance, and customer support with up to 40–60% operational savings."
+                },
+                {
+                  q: "Do you integrate Odoo or custom ERP modules?",
+                  a: "Our engineering team provides comprehensive ERP systems setup—guiding selection, custom modules, database migration, and staff training to streamline workflows."
+                }
+              ].map((faq, idx) => (
+                <div key={idx} className="py-5">
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex items-start justify-between text-left gap-4 focus:outline-none group"
+                    aria-expanded={activeFaq === idx}
+                  >
+                    <span className="text-base font-semibold text-slate-900 group-hover:text-brand-blue transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="text-slate-400 group-hover:text-slate-700 mt-1 flex-shrink-0">
+                      {activeFaq === idx ? <Minus size={18} /> : <Plus size={18} />}
+                    </span>
+                  </button>
+                  {activeFaq === idx && (
+                    <p className="mt-3 text-sm text-slate-600 leading-relaxed pr-8">
+                      {faq.a}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
     </>

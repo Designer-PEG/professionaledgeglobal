@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
-import { FiDollarSign, FiBookOpen, FiHome, FiGlobe, FiAlertCircle, FiBriefcase, FiCheckCircle } from 'react-icons/fi';
+import { DollarSign, BookOpen, Home, Globe, AlertCircle, Briefcase, CheckCircle2, Check } from 'lucide-react';
+import useSEO from '../hooks/useSEO';
 
 const CareersPage = () => {
+  useSEO(
+    "Careers & Opportunities",
+    "Join the team at Professional Edge Global. Explore internship roles, expert accounting positions, and creative design job opportunities."
+  );
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -147,184 +152,197 @@ const CareersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-36 pb-20 font-sans relative overflow-hidden">
-      {/* Visual ambient layers */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none opacity-5" />
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        
-        {/* Header Block */}
-        <div className="text-center mb-20 space-y-4">
-          <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-            Join Us
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Build Your Career With Us
-          </h1>
-          <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Join a dynamic consulting team that values operational innovation, continuous upskilling, and collaborative growth.
-          </p>
-        </div>
-
-        {/* Main Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Job Alerts Details Box */}
-          <div className="lg:col-span-8">
-            <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-md">
-              <div className="p-6 sm:p-10 space-y-8">
-                
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue">
-                    <FiBriefcase size={20} />
-                  </div>
-                  <h2 className="text-lg font-extrabold text-slate-900 font-heading">Current Opportunities</h2>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="p-6 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-                    <h3 className="text-sm font-extrabold text-slate-900 font-sans">No active vacancies at this time</h3>
-                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
-                      We do not have any open positions today, but we are always scouting for top-tier operations experts and graphic designers.
-                    </p>
-                    <p className="text-slate-500 text-xs leading-relaxed font-normal">
-                      Sign up for our career updates below to be informed of new openings instantly.
-                    </p>
-                  </div>
-
-                  {!isSubscribed ? (
-                    <form onSubmit={handleSubmit} className="space-y-4 pt-4 border-t border-slate-100">
-                      <div className="space-y-2">
-                        <label htmlFor="email" className="block text-[10px] font-bold text-slate-700 uppercase tracking-widest">
-                          Email Address
-                        </label>
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          autoComplete="email"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 transition-colors"
-                          placeholder="name@company.com"
-                        />
-                      </div>
-
-                      {error && (
-                        <div className="p-3 bg-red-50 text-red-800 border border-red-200/60 rounded-xl text-xs flex items-center gap-2">
-                          <FiAlertCircle className="flex-shrink-0" />
-                          <span className="font-semibold">{error}</span>
-                        </div>
-                      )}
-
-                      {timeLeft > 0 && (
-                        <div className="p-3 bg-amber-50 text-amber-800 border border-amber-200/60 rounded-xl text-xs">
-                          Cooldown period active. Please wait {timeLeft} seconds before next attempt.
-                        </div>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={isLoading || timeLeft > 0}
-                        className={`w-full py-3.5 px-6 text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 rounded-xl shadow-xs active:scale-98 ${
-                          isLoading || timeLeft > 0 ? 'bg-slate-300 cursor-not-allowed' : 'bg-brand-green hover:bg-brand-blue'
-                        }`}
-                      >
-                        {isLoading ? 'Submitting...' : 'Subscribe to Vacancy Alerts'}
-                      </button>
-                    </form>
-                  ) : (
-                    <div className="p-5 bg-emerald-50 border border-emerald-150 text-center rounded-xl animate-fade-in shadow-inner">
-                      <FiCheckCircle className="text-brand-green mx-auto mb-2" size={24} />
-                      <p className="text-xs font-bold text-emerald-800 tracking-wide">
-                        ✓ Subscription Saved
-                      </p>
-                      <p className="text-[10px] text-slate-500 mt-1 leading-normal">
-                        Thank you for subscribing! We will notify you when matching career opportunities arise.
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-              </div>
+    <div className="min-h-screen bg-white font-sans">
+      
+      {/* Page Header */}
+      <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-[2px] bg-brand-blue" />
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue">
+                Careers &amp; Talent Network
+              </span>
             </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+              Build Your Career With Us
+            </h1>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Join an advisory practice that values analytical rigor, continuous professional upskilling, and long-term client stewardship.
+            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Benefits sidebar columns */}
-          <div className="lg:col-span-4 space-y-6">
+      {/* Main Content Split */}
+      <section className="py-20 lg:py-28 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Why Join Us card */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-md space-y-6">
-              <div className="flex items-center gap-2">
-                <FiCheckCircle className="text-brand-blue" />
-                <h2 className="text-sm font-extrabold text-slate-900 font-heading uppercase tracking-wide">Why Join Us?</h2>
+            {/* Left Column: Current Opportunities & Talent Alert Form */}
+            <div className="lg:col-span-7 space-y-8">
+              <div className="space-y-2 pb-6 border-b border-slate-200">
+                <div className="flex items-center gap-2.5 text-brand-blue">
+                  <Briefcase size={18} strokeWidth={1.75} />
+                  <span className="text-xs font-semibold uppercase tracking-wider">Open Roles</span>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 font-heading">
+                  Current Opportunities
+                </h2>
               </div>
 
-              <div className="space-y-5">
-                {[
-                  {
-                    name: 'Competitive Rewards',
-                    description: 'Market-competitive salaries, performance bonuses, and annual appraisals.',
-                    icon: <FiDollarSign className="text-brand-blue" />,
-                  },
-                  {
-                    name: 'Growth & Training',
-                    description: 'Paid certifications, continuous learning resources, and mentorship.',
-                    icon: <FiBookOpen className="text-brand-blue" />,
-                  },
-                  {
-                    name: 'Flexible Work',
-                    description: 'Support for hybrid workplace options and flexible hours.',
-                    icon: <FiHome className="text-brand-blue" />,
-                  },
-                  {
-                    name: 'Global Culture',
-                    description: 'Collaborate with teams across digital and physical consulting hubs.',
-                    icon: <FiGlobe className="text-brand-blue" />,
-                  },
-                ].map((benefit, index) => (
-                  <div key={index} className="flex gap-3">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center text-xs">
-                      {benefit.icon}
-                    </div>
+              <div className="p-6 bg-slate-50 border border-slate-200 rounded-md space-y-2">
+                <h3 className="text-base font-bold text-slate-900">
+                  No active vacancies at this time
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  While we do not have open roles listed today, we continuously evaluate chartered accountancy candidates, audit officers, and digital specialists for upcoming client mandates.
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Register your email below to receive immediate notification when new positions open.
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-md p-6 sm:p-8">
+                <h3 className="text-base font-bold text-slate-900 font-heading mb-1">
+                  Talent Network Alerts
+                </h3>
+                <p className="text-xs text-slate-500 mb-6">
+                  Be notified directly when audit, advisory, or creative roles open.
+                </p>
+
+                {!isSubscribed ? (
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <h3 className="text-xs font-bold text-slate-800 leading-tight">{benefit.name}</h3>
-                      <p className="mt-1 text-[11px] text-slate-500 leading-relaxed font-normal">{benefit.description}</p>
+                      <label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Email Address
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900 placeholder-slate-400 transition-colors"
+                        placeholder="name@company.com"
+                      />
+                    </div>
+
+                    {error && (
+                      <div className="p-3 bg-red-50 text-red-800 border border-red-200 rounded-md text-xs flex items-center gap-2">
+                        <AlertCircle size={15} className="flex-shrink-0" />
+                        <span className="font-medium">{error}</span>
+                      </div>
+                    )}
+
+                    {timeLeft > 0 && (
+                      <div className="p-3 bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-xs">
+                        Cooldown period active. Please wait {timeLeft} seconds before next attempt.
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isLoading || timeLeft > 0}
+                      className={`w-full sm:w-auto py-2.5 px-6 text-white font-medium text-sm transition-colors rounded-md ${
+                        isLoading || timeLeft > 0 ? 'bg-slate-300 cursor-not-allowed' : 'bg-brand-blue hover:bg-primary-hover'
+                      }`}
+                    >
+                      {isLoading ? 'Submitting...' : 'Subscribe to Vacancy Alerts'}
+                    </button>
+                  </form>
+                ) : (
+                  <div className="p-5 bg-emerald-50/70 border border-emerald-200 rounded-md flex items-start gap-3">
+                    <CheckCircle2 className="text-brand-green flex-shrink-0 mt-0.5" size={20} />
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">
+                        Subscription Confirmed
+                      </p>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                        Thank you for registering. We will notify you when matching career opportunities arise.
+                      </p>
                     </div>
                   </div>
-                ))}
+                )}
               </div>
             </div>
 
-            {/* Values card */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-md space-y-6">
-              <div className="flex items-center gap-2">
-                <FiCheckCircle className="text-brand-blue" />
-                <h2 className="text-sm font-extrabold text-slate-900 font-heading uppercase tracking-wide">Our Values</h2>
+            {/* Right Column: Editorial Benefits & Values (No Nested Cards) */}
+            <div className="lg:col-span-5 space-y-12">
+              
+              {/* Why Join Us */}
+              <div className="space-y-6">
+                <h2 className="text-xl font-bold text-slate-900 font-heading pb-4 border-b border-slate-200">
+                  Why Join Professional Edge?
+                </h2>
+
+                <div className="divide-y divide-slate-200">
+                  {[
+                    {
+                      name: 'Competitive Compensation',
+                      description: 'Market-competitive salaries, performance incentives, and structured annual appraisals.',
+                      icon: DollarSign,
+                    },
+                    {
+                      name: 'Professional Certifications',
+                      description: 'Sponsored training, continuous audit and ERP learning resources, and direct partner mentorship.',
+                      icon: BookOpen,
+                    },
+                    {
+                      name: 'Flexible Work Structure',
+                      description: 'Support for hybrid workplace arrangements and balanced project scheduling.',
+                      icon: Home,
+                    },
+                    {
+                      name: 'Cross-Border Exposure',
+                      description: 'Collaborate on international BPO/KPO mandates and multi-jurisdiction advisory projects.',
+                      icon: Globe,
+                    },
+                  ].map((benefit, index) => {
+                    const Icon = benefit.icon;
+                    return (
+                      <div key={index} className="py-4 first:pt-0 last:pb-0 flex gap-3.5 items-start">
+                        <div className="text-brand-blue mt-0.5 flex-shrink-0">
+                          <Icon size={18} strokeWidth={1.75} />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-bold text-slate-900">{benefit.name}</h3>
+                          <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">{benefit.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
-              <ul className="space-y-3.5 text-xs text-slate-500 font-semibold">
-                {[
-                  'Innovation through collaboration',
-                  'Client-first advisory mapping',
-                  'Strict data-driven decisions',
-                  'Ethical corporate compliance'
-                ].map((val, index) => (
-                  <li key={index} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 flex-shrink-0"></span>
-                    <span className="leading-snug">{val}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Core Values */}
+              <div className="space-y-5 pt-4">
+                <h2 className="text-xl font-bold text-slate-900 font-heading pb-4 border-b border-slate-200">
+                  Our Core Values
+                </h2>
+
+                <ul className="space-y-3 text-sm text-slate-700">
+                  {[
+                    'Innovation through cross-functional collaboration',
+                    'Client-first advisory and transparent reporting',
+                    'Rigorous data-driven financial decisions',
+                    'Uncompromising ethical and regulatory compliance'
+                  ].map((val, index) => (
+                    <li key={index} className="flex items-start gap-2.5">
+                      <Check size={16} className="text-brand-green mt-0.5 flex-shrink-0" />
+                      <span>{val}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
 
           </div>
-
         </div>
-
-      </div>
+      </section>
     </div>
   );
 };

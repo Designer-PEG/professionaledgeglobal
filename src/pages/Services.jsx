@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import servicesData from '../json/services.json';
 import { 
-  FiPieChart, FiBriefcase, FiSettings, FiDollarSign, 
-  FiUsers, FiFileText, FiHeadphones, FiActivity, FiArrowRight,
-  FiTrendingUp, FiActivity as FiCalc, FiAlertTriangle, FiCheckCircle
-} from 'react-icons/fi';
+  PieChart, Briefcase, Settings, DollarSign, 
+  Users, FileText, Headphones, Activity, ArrowRight, ArrowLeft,
+  TrendingUp, Calculator, AlertTriangle, CheckCircle2, Check
+} from 'lucide-react';
 
 // Import all div images
 import div1 from '../assets/div-1.png';
@@ -16,6 +16,8 @@ import div5 from '../assets/div-5.png';
 import div6 from '../assets/div-6.png';
 import div7 from '../assets/div-7.png';
 import div8 from '../assets/div-8.png';
+
+import useSEO from '../hooks/useSEO';
 
 const imageMap = {
   'div_1': div1,
@@ -29,26 +31,35 @@ const imageMap = {
 };
 
 const iconComponents = {
-  FiPieChart,
-  FiBriefcase,
-  FiSettings,
-  FiDollarSign,
-  FiUsers,
-  FiFileText,
-  FiHeadphones,
-  FiActivity
+  FiPieChart: PieChart,
+  FiBriefcase: Briefcase,
+  FiSettings: Settings,
+  FiDollarSign: DollarSign,
+  FiUsers: Users,
+  FiFileText: FileText,
+  FiHeadphones: Headphones,
+  FiActivity: Activity
 };
 
 const getIconComponent = (iconName, className = "text-brand-blue") => {
   const Icon = iconComponents[iconName];
   if (!Icon) return null;
-  return <Icon className={className} size={22} />;
+  return <Icon className={className} size={20} strokeWidth={1.75} />;
 };
 
 export default function Services() {
   const { id } = useParams();
+  
+  const activeService = servicesData.find(s => s.id === id);
+  const pageTitle = activeService 
+    ? `${activeService.title} | Services`
+    : "Strategic Advisory & Consulting Services";
+  const pageDesc = activeService
+    ? activeService.description || "Learn about this key service from Professional Edge Global."
+    : "Explore our range of professional advisory offerings, including Operations Audit, Corporate Restructuring, Financial Planning, and Business Transformation.";
 
-  // Scroll to top when id changes
+  useSEO(pageTitle, pageDesc);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -60,7 +71,6 @@ export default function Services() {
   const [revenue, setRevenue] = useState('');
   const [burnRate, setBurnRate] = useState('');
   const [reserves, setReserves] = useState('');
-  const [fundingStage, setFundingStage] = useState('Bootstrap');
   const [calcResult, setCalcResult] = useState(null);
 
   const handleCalculate = (e) => {
@@ -111,112 +121,160 @@ export default function Services() {
     : null;
 
   if (selectedService) {
-    const IconComponent = iconComponents[selectedService.icon] || FiBriefcase;
+    const IconComponent = iconComponents[selectedService.icon] || Briefcase;
     const serviceImage = imageMap[selectedService.image_name];
     
     return (
-      <div className="min-h-screen pt-36 pb-20 bg-slate-50 font-sans relative overflow-hidden">
-        {/* Layer background decorative accents */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xl">
+      <div className="min-h-screen pt-28 pb-20 lg:pt-36 lg:pb-28 bg-white font-sans">
+        <div className="max-w-6xl mx-auto px-6">
+          
+          {/* Top Back Navigation */}
+          <div className="mb-8 pb-6 border-b border-slate-200">
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-brand-blue transition-colors"
+            >
+              <ArrowLeft size={16} />
+              <span>All Advisory Practice Areas</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             
-            {/* Hero Banner inside the card wrapper */}
-            <div className="w-full h-80 overflow-hidden relative bg-slate-950">
-              <img 
-                src={serviceImage} 
-                alt={selectedService.title}
-                className="w-full h-full object-cover opacity-65 grayscale"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
-              
-              {/* Overlay Content */}
-              <div className="absolute bottom-6 left-6 right-6 text-white z-20 flex items-center gap-3.5">
-                <div className="w-12 h-12 bg-brand-blue flex items-center justify-center border border-white/10 rounded-xl shadow-md">
-                  <IconComponent className="h-6 w-6 text-white" />
+            {/* Left Primary Content */}
+            <div className="lg:col-span-8 space-y-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2.5 text-brand-blue">
+                  <IconComponent size={20} strokeWidth={1.75} />
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em]">
+                    Advisory Practice Area
+                  </span>
                 </div>
-                <div>
-                  <span className="text-[9px] uppercase font-bold text-slate-300 tracking-widest block">Expert Advisory</span>
-                  <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-1 font-heading">
-                    {selectedService.title}
-                  </h1>
-                </div>
-              </div>
-            </div>
-            
-            {/* Card Content Details */}
-            <div className="p-6 sm:p-10 space-y-8">
-              <div className="space-y-4 text-slate-650">
-                <p className="text-sm sm:text-base leading-relaxed font-normal">
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 font-heading leading-tight">
+                  {selectedService.title}
+                </h1>
+                <p className="text-lg text-slate-600 leading-relaxed">
                   {selectedService.description}
                 </p>
-
-                {selectedService.subDescription && (
-                  <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-500 leading-relaxed">
-                    {selectedService.subDescription}
-                  </div>
-                )}
               </div>
 
-              {/* Service features checklists */}
-              <div className="border-t border-slate-100 pt-8">
-                <h3 className="text-[10px] uppercase tracking-widest font-extrabold text-brand-blue mb-4">
-                  Why Choose Professional Edge Global?
+              {/* Service Image Frame */}
+              <div className="w-full h-72 sm:h-80 overflow-hidden bg-slate-100 border border-slate-200 rounded-md">
+                <img 
+                  src={serviceImage} 
+                  alt={selectedService.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Detailed Scope */}
+              {selectedService.subDescription && (
+                <div className="space-y-3 pt-2">
+                  <h2 className="text-lg font-bold text-slate-900 font-heading">
+                    Scope of Advisory &amp; Execution
+                  </h2>
+                  <p className="text-base text-slate-600 leading-relaxed">
+                    {selectedService.subDescription}
+                  </p>
+                </div>
+              )}
+
+              {/* Engagement Standards */}
+              <div className="border-t border-slate-200 pt-8">
+                <h3 className="text-xs uppercase tracking-[0.12em] font-semibold text-slate-500 mb-5">
+                  Standard Engagement Deliverables
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    "Customized operations roadmap",
-                    "Continuous monitoring support",
-                    "100% data transparency",
-                    "Direct consultation with founders"
+                    "Customized operations & compliance roadmap",
+                    "Continuous periodic monitoring support",
+                    "Complete audit & data transparency",
+                    "Direct consultation with managing partners"
                   ].map((feat, index) => (
-                    <div key={index} className="flex items-center gap-3 text-slate-500 text-xs sm:text-sm">
-                      <span className="w-5 h-5 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-[10px] text-brand-green font-extrabold">✓</span>
+                    <div key={index} className="flex items-start gap-3 text-slate-700 text-sm">
+                      <Check className="text-brand-green flex-shrink-0 mt-0.5" size={16} />
                       <span>{feat}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Special interactive diagnostic embed on the startup diagnostic detailed page */}
+              {/* Special callout on market-research page linking to /marketing */}
+              {selectedService.id === 'market-research' && (
+                <div className="bg-slate-50 border border-slate-200 rounded-md p-6 sm:p-8 mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                  <div className="space-y-1.5 max-w-lg">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-brand-green block">
+                      Creative &amp; Digital Portfolio
+                    </span>
+                    <h3 className="text-lg font-bold text-slate-900 font-heading">
+                      Explore Our Full Digital &amp; Creative Suite
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      View our 9 specialized creative capabilities, live client website builds, and digital campaign case studies.
+                    </p>
+                  </div>
+                  <Link
+                    to="/marketing"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium rounded-md transition-colors flex-shrink-0"
+                  >
+                    <span>View Digital Portfolio</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                </div>
+              )}
+
+              {/* Interactive Diagnostic Embed on startup-diagnostic page */}
               {selectedService.id === 'startup-diagnostic' && (
-                <div className="bg-slate-50/50 border border-slate-200 rounded-2xl p-6 mt-8">
-                  <h3 className="text-sm font-extrabold text-slate-900 font-heading mb-4 flex items-center gap-2">
-                    <FiCalc className="text-brand-blue" />
-                    Quick Runway Diagnostic Tool
-                  </h3>
+                <div className="bg-slate-50 border border-slate-200 rounded-md p-6 sm:p-8 mt-8 space-y-6">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-brand-blue">
+                      <Calculator size={18} />
+                      <h3 className="text-base font-bold text-slate-900 font-heading">
+                        Quick Runway Diagnostic Tool
+                      </h3>
+                    </div>
+                    <p className="text-xs text-slate-500">
+                      Enter your current monthly figures to calculate net burn and cash runway.
+                    </p>
+                  </div>
+
                   <form onSubmit={handleCalculate} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-[10px] font-bold text-slate-600 mb-1 uppercase tracking-wider">Monthly Revenue ($)</label>
+                        <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                          Monthly Revenue ($)
+                        </label>
                         <input 
                           type="number" 
                           value={revenue} 
                           onChange={(e) => setRevenue(e.target.value)} 
-                          className="w-full px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                          className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                           placeholder="e.g. 5000" 
                           required 
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-slate-600 mb-1 uppercase tracking-wider">Monthly Expenses ($)</label>
+                        <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                          Monthly Expenses ($)
+                        </label>
                         <input 
                           type="number" 
                           value={burnRate} 
                           onChange={(e) => setBurnRate(e.target.value)} 
-                          className="w-full px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                          className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                           placeholder="e.g. 8000" 
                           required 
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-slate-600 mb-1 uppercase tracking-wider">Cash Reserves ($)</label>
+                        <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                          Cash Reserves ($)
+                        </label>
                         <input 
                           type="number" 
                           value={reserves} 
                           onChange={(e) => setReserves(e.target.value)} 
-                          className="w-full px-3 py-2 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                          className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                           placeholder="e.g. 30000" 
                           required 
                         />
@@ -224,173 +282,267 @@ export default function Services() {
                     </div>
                     <button 
                       type="submit" 
-                      className="w-full py-2.5 bg-brand-blue hover:bg-brand-green text-white text-xs font-bold uppercase tracking-wider transition-colors duration-250 rounded-lg"
+                      className="px-5 py-2.5 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium transition-colors rounded-md"
                     >
-                      Analyze Health
+                      Calculate Runway
                     </button>
                   </form>
 
                   {calcResult && (
-                    <div className="mt-5 p-4 border border-slate-200 bg-white rounded-xl animate-fade-in space-y-2">
+                    <div className="p-4 border border-slate-200 bg-white rounded-md space-y-1.5">
                       <div className="flex items-center gap-2">
                         {calcResult.status === 'critical' ? (
-                          <FiAlertTriangle className="text-red-500" />
+                          <AlertTriangle className="text-red-600" size={16} />
                         ) : (
-                          <FiCheckCircle className="text-brand-green" />
+                          <CheckCircle2 className="text-brand-green" size={16} />
                         )}
-                        <span className="text-xs font-extrabold uppercase tracking-wide">
-                          Calculated Runway: <span className={calcResult.status === 'critical' ? 'text-red-500' : 'text-brand-green'}>{calcResult.runway}</span>
+                        <span className="text-sm font-bold text-slate-900">
+                          Calculated Runway:{" "}
+                          <span className={calcResult.status === 'critical' ? 'text-red-600' : 'text-brand-green'}>
+                            {calcResult.runway}
+                          </span>
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">{calcResult.message}</p>
+                      <p className="text-xs text-slate-600 leading-relaxed">{calcResult.message}</p>
                     </div>
                   )}
                 </div>
               )}
+            </div>
 
-              {/* CTAs */}
-              <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-between items-center">
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-1.5 text-brand-blue hover:text-brand-green font-bold text-xs uppercase tracking-wider transition-colors duration-150"
-                >
-                  ← All services
-                </Link>
+            {/* Right Sidebar: Practice Directory & Consultation CTA */}
+            <aside className="lg:col-span-4 space-y-6">
+              <div className="bg-slate-50 border border-slate-200 rounded-md p-6 space-y-4">
+                <h3 className="text-base font-bold text-slate-900 font-heading">
+                  Engage Our Partners
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Schedule a confidential consultation regarding {selectedService.title.toLowerCase()} and receive a tailored scope proposal.
+                </p>
                 <Link
                   to="/contact"
-                  className="w-full sm:w-auto px-5 py-3 bg-brand-blue hover:bg-brand-green text-white font-bold text-xs uppercase tracking-widest transition-colors duration-150 text-center rounded-xl shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand-blue hover:bg-primary-hover text-white font-medium text-sm transition-colors rounded-md"
                 >
-                  Request Consultation
+                  <span>Request Consultation</span>
+                  <ArrowRight size={15} />
                 </Link>
               </div>
-            </div>
-            
+
+              <div className="border border-slate-200 rounded-md overflow-hidden bg-white">
+                <div className="px-5 py-3.5 bg-slate-50 border-b border-slate-200">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    All Practice Areas
+                  </h4>
+                </div>
+                <ul className="divide-y divide-slate-200">
+                  {servicesData.map((s) => {
+                    const isCurrent = s.id === selectedService.id;
+                    return (
+                      <li key={s.id}>
+                        <Link
+                          to={`/services/${s.id}`}
+                          className={`flex items-center justify-between px-5 py-3 text-xs font-medium transition-colors ${
+                            isCurrent
+                              ? "bg-slate-50 text-brand-blue font-semibold border-l-2 border-brand-blue"
+                              : "text-slate-600 hover:text-slate-900 hover:bg-slate-50/60"
+                          }`}
+                        >
+                          <span className="truncate pr-2">{s.title}</span>
+                          <ArrowRight size={13} className={isCurrent ? "text-brand-blue" : "text-slate-300"} />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                  <li>
+                    <Link
+                      to="/marketing"
+                      className="flex items-center justify-between px-5 py-3 text-xs font-semibold text-brand-blue hover:bg-slate-50/60 transition-colors"
+                    >
+                      <span className="truncate pr-2">Digital &amp; Creative Studio</span>
+                      <ArrowRight size={13} className="text-brand-blue" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </aside>
+
           </div>
         </div>
       </div>
     );
   }
 
-  // General Services Layout
+  // Main Services Directory Layout
   return (
-    <div className="min-h-screen pt-36 pb-20 bg-slate-50 font-sans relative overflow-hidden">
-      {/* Decorative blurred backgrounds */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-12 right-1/4 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        
-        {/* Header Block */}
-        <div className="text-center mb-20 space-y-4">
-          <span className="px-3.5 py-1 bg-white border border-slate-200 text-brand-blue text-xs font-bold uppercase tracking-wider inline-block rounded-full shadow-2xs">
-            Our Offerings
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
-            Corporate Operations & Consulting
-          </h1>
-          <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            High-converting solutions mapped across dynamic operational sectors to scale business value safely.
-          </p>
+    <div className="min-h-screen bg-white font-sans">
+      {/* Header Section */}
+      <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-[2px] bg-brand-blue" />
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue">
+                Our Offerings
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
+              Corporate Operations &amp; Consulting
+            </h1>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Full-spectrum financial, legal, tax, and operational advisory built to help enterprises and startups scale with institutional discipline.
+            </p>
+          </div>
         </div>
-         
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {servicesData.map((service) => (
-            <div 
-              key={service.id} 
-              className="group bg-white border border-slate-200/80 rounded-xl transition-all duration-300 hover:border-brand-blue/30 hover:shadow-lg overflow-hidden h-full flex flex-col hover-lift focus-within:ring-2 focus-within:ring-brand-blue/20"
-            >
-              {/* Photo section */}
-              <div className="h-44 overflow-hidden relative bg-slate-950">
-                <img 
-                  src={imageMap[service.image_name]} 
-                  alt={service.title}
-                  className="w-full h-full object-cover grayscale opacity-85 group-hover:grayscale-0 group-hover:scale-103 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
-              </div>
-            
-              {/* Text detail section */}
-              <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
-                <div className="space-y-3">
-                  <div className="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200/60 flex items-center justify-center text-brand-blue">
-                    {getIconComponent(service.icon)}
+      </section>
+
+      {/* Services Architectural Grid */}
+      <section className="py-20 lg:py-24 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-slate-200">
+            {servicesData.map((service, index) => (
+              <div 
+                key={service.id} 
+                className="group bg-white border-r border-b border-slate-200 p-7 sm:p-9 flex flex-col justify-between hover:bg-slate-50/50 transition-colors"
+              >
+                <div className="space-y-6">
+                  {/* Top Meta Row */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-slate-400">
+                      0{index + 1}
+                    </span>
+                    <div className="text-brand-blue">
+                      {getIconComponent(service.icon)}
+                    </div>
                   </div>
-                  <h3 className="text-sm font-extrabold text-slate-900 font-heading tracking-tight leading-snug">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">
-                    {service.description}
-                  </p>
+
+                  {/* Image & Copy Split */}
+                  <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
+                    <div className="sm:col-span-5 h-36 overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
+                      <img 
+                        src={imageMap[service.image_name]} 
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="sm:col-span-7 space-y-2">
+                      <h2 className="text-lg font-bold text-slate-900 font-heading leading-snug group-hover:text-brand-blue transition-colors">
+                        <Link to={`/services/${service.id}`}>
+                          {service.title}
+                        </Link>
+                      </h2>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="pt-4 border-t border-slate-100">
+                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                   <Link
                     to={`/services/${service.id}`}
-                    className="inline-flex items-center gap-1 text-brand-blue hover:text-brand-green font-bold text-[10px] tracking-widest uppercase transition-colors duration-150 focus:outline-none"
+                    className="inline-flex items-center gap-1.5 text-brand-blue hover:text-primary-hover font-semibold text-xs uppercase tracking-wider group/link"
                   >
-                    LEARN MORE
-                    <FiArrowRight size={12} />
+                    <span>Learn More</span>
+                    <ArrowRight size={14} className="group-hover/link:translate-x-0.5 transition-transform" />
                   </Link>
+                  {service.id === 'market-research' && (
+                    <Link
+                      to="/marketing"
+                      className="inline-flex items-center gap-1 text-slate-600 hover:text-brand-blue font-semibold text-xs uppercase tracking-wider"
+                    >
+                      <span>Creative Portfolio</span>
+                      <ArrowRight size={13} />
+                    </Link>
+                  )}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Global Startup Financial Health Calculator embed inside the main layout */}
-        <div className="mt-28 bg-white border border-slate-200/80 rounded-2xl p-8 sm:p-12 shadow-xl relative overflow-hidden">
-          <div className="absolute top-[-10%] right-[-10%] w-[35%] h-[45%] bg-gradient-to-br from-brand-blue/5 to-brand-green/5 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Header info */}
-            <div className="lg:col-span-5 space-y-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 border border-slate-200 text-brand-blue text-[10px] font-bold uppercase tracking-wider rounded-full">
-                <FiTrendingUp />
-                Interactive Diagnostic Tool
+          {/* Dedicated Cross-Link Banner to /marketing */}
+          <div className="mt-12 border border-slate-200 bg-slate-50 p-7 sm:p-9 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-green block">
+                Creative &amp; Digital Division
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-heading leading-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-heading tracking-tight">
+                Looking for Web Engineering, Branding, SEO, or Media Production?
+              </h2>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Explore our dedicated Digital Marketing &amp; Creative practice to view our 9 creative capabilities, recent website launches, and client growth metrics.
+              </p>
+            </div>
+            <Link
+              to="/marketing"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium rounded-md transition-colors flex-shrink-0 self-start lg:self-center group"
+            >
+              <span>Visit Digital &amp; Creative Studio</span>
+              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Startup Financial Health Calculator Section */}
+      <section className="py-20 lg:py-24 px-6 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Info */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="flex items-center gap-2 text-brand-blue">
+                <TrendingUp size={18} />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em]">
+                  Interactive Diagnostic Tool
+                </span>
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 tracking-tight font-heading leading-tight">
                 Startup Financial Health Check-up
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                Estimate your operational runway and calculate burn multiples instantly. Let us help you audit startup cash flows and draft strategic roadmaps.
+              <p className="text-slate-600 text-base leading-relaxed">
+                Estimate your operational runway and evaluate net burn instantly. Our advisory team uses these baseline indicators to structure cash-flow audits and fundraising roadmaps.
               </p>
             </div>
 
-            {/* Interactive Form */}
-            <div className="lg:col-span-7 bg-slate-50/50 border border-slate-200/80 rounded-2xl p-6 sm:p-8">
-              <form onSubmit={handleCalculate} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Right Interactive Form */}
+            <div className="lg:col-span-7 bg-white border border-slate-200 rounded-md p-6 sm:p-8 shadow-2xs">
+              <form onSubmit={handleCalculate} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-600 mb-1.5 uppercase tracking-wider">Monthly Revenue ($)</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Monthly Revenue ($)
+                    </label>
                     <input 
                       type="number" 
                       value={revenue} 
                       onChange={(e) => setRevenue(e.target.value)} 
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                       placeholder="e.g. 10000" 
                       required 
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-600 mb-1.5 uppercase tracking-wider">Monthly Expenses ($)</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Monthly Expenses ($)
+                    </label>
                     <input 
                       type="number" 
                       value={burnRate} 
                       onChange={(e) => setBurnRate(e.target.value)} 
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                       placeholder="e.g. 15000" 
                       required 
                     />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-[10px] font-bold text-slate-600 mb-1.5 uppercase tracking-wider">Current Cash Reserves ($)</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Current Cash Reserves ($)
+                    </label>
                     <input 
                       type="number" 
                       value={reserves} 
                       onChange={(e) => setReserves(e.target.value)} 
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-blue rounded-lg text-xs" 
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-300 focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/15 rounded-md text-sm text-slate-900" 
                       placeholder="e.g. 60000" 
                       required 
                     />
@@ -398,30 +550,33 @@ export default function Services() {
                 </div>
                 <button 
                   type="submit" 
-                  className="w-full py-3 bg-brand-blue hover:bg-brand-green text-white text-xs font-bold uppercase tracking-widest transition-colors duration-250 rounded-xl"
+                  className="w-full sm:w-auto px-6 py-3 bg-brand-blue hover:bg-primary-hover text-white text-sm font-medium transition-colors rounded-md"
                 >
                   Analyze Operations Runway
                 </button>
               </form>
 
               {calcResult && (
-                <div className="mt-6 p-5 border border-slate-200 bg-white rounded-xl animate-fade-in space-y-2.5">
+                <div className="mt-6 p-5 border border-slate-200 bg-slate-50 rounded-md space-y-3">
                   <div className="flex items-center gap-2">
                     {calcResult.status === 'critical' ? (
-                      <FiAlertTriangle className="text-red-500" size={16} />
+                      <AlertTriangle className="text-red-600" size={18} />
                     ) : (
-                      <FiCheckCircle className="text-brand-green" size={16} />
+                      <CheckCircle2 className="text-brand-green" size={18} />
                     )}
-                    <span className="text-xs font-extrabold uppercase tracking-widest">
-                      Health Status: <span className={calcResult.status === 'critical' ? 'text-red-500' : 'text-brand-green'}>{calcResult.runway}</span>
+                    <span className="text-sm font-bold text-slate-900">
+                      Health Status:{" "}
+                      <span className={calcResult.status === 'critical' ? 'text-red-600' : 'text-brand-green'}>
+                        {calcResult.runway}
+                      </span>
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">{calcResult.message}</p>
-                  <div className="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between">
-                    <span className="text-[10px] text-slate-400 font-semibold">Want a detailed audit?</span>
-                    <Link to="/contact" className="text-brand-blue hover:text-brand-green font-bold text-[10px] tracking-widest uppercase flex items-center gap-1">
-                      Book Founder Review
-                      <FiArrowRight size={10} />
+                  <p className="text-sm text-slate-600 leading-relaxed">{calcResult.message}</p>
+                  <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
+                    <span className="text-xs text-slate-500 font-medium">Need a comprehensive cash-flow audit?</span>
+                    <Link to="/contact" className="text-brand-blue hover:text-primary-hover font-semibold text-xs uppercase tracking-wider inline-flex items-center gap-1">
+                      <span>Book Founder Review</span>
+                      <ArrowRight size={13} />
                     </Link>
                   </div>
                 </div>
@@ -430,8 +585,7 @@ export default function Services() {
 
           </div>
         </div>
-
-      </div>
+      </section>
     </div>
   );
 }
